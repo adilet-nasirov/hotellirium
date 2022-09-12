@@ -2,8 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Banner from "../components/Banner";
 import Header from "../components/Header";
+import MediumCard from "../components/MediumCard";
 import SmallCard from "../components/SmallCard";
 import styles from "../styles/Home.module.css";
+import cardsData from "./data-files/cardsData";
 import exploreData from "./data-files/exploreData";
 export default function Home() {
   return (
@@ -34,6 +36,11 @@ export default function Home() {
         </section>
         <section>
           <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+          <div>
+            {cardsData.map(({ img, title }) => {
+              <MediumCard key={img} img={img} title={title} />;
+            })}
+          </div>
         </section>
       </main>
     </div>
