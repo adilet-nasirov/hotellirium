@@ -45,14 +45,13 @@ export default function Home() {
           </div>
         </section>
         {/* Large card section */}
-        <section>
-          <LargeCard
-            img={"https://links.papareact.com/4cj"}
-            title={"The Greatest Outdoors"}
-            description={"Wishlists curated by Ordo"}
-            buttonText={"Get Inspired"}
-          />
-        </section>
+
+        <LargeCard
+          img={"https://links.papareact.com/4cj"}
+          title={"The Greatest Outdoors"}
+          description={"Wishlists curated by Ordo"}
+          buttonText={"Get Inspired"}
+        />
       </main>
     </div>
   );
