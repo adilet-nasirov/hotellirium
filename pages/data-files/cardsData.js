@@ -4,7 +4,7 @@ const cardsData = [
     title: "Outdoor gaeways",
   },
   {
-    img: "https://links.papareact.com/q7i",
+    img: "https://links.papareact.com/q7j",
     title: "Unique stays",
   },
   {
