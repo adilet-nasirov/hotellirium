@@ -8,6 +8,7 @@ import styles from "../styles/Home.module.css";
 import cardsData from "./data-files/cardsData";
 import exploreData from "./data-files/exploreData";
 import LargeCard from "../components/LargeCard";
+import Footer from "../components/Footer";
 export default function Home() {
   console.log(cardsData);
   return (
@@ -53,6 +54,9 @@ export default function Home() {
           buttonText={"Get Inspired"}
         />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
