@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import MediumCard from "../components/MediumCard";
@@ -10,7 +9,6 @@ import exploreData from "./data-files/exploreData";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
 export default function Home() {
-  console.log(cardsData);
   return (
     <div className={styles.container}>
       <Head>
@@ -46,7 +44,6 @@ export default function Home() {
           </div>
         </section>
         {/* Large card section */}
-
         <LargeCard
           img={"https://links.papareact.com/4cj"}
           title={"The Greatest Outdoors"}
