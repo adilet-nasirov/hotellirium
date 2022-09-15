@@ -1,7 +1,7 @@
 const cardsData = [
   {
     img: "https://links.papareact.com/2io",
-    title: "Outdoor gaeways",
+    title: "Outdoor gateways",
   },
   {
     img: "https://links.papareact.com/q7j",

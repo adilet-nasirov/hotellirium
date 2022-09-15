@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import {
   SearchIcon,
   GlobeAltIcon,
@@ -8,6 +10,7 @@ import {
   UsersIcon,
 } from "@heroicons/react/solid";
 const Header = () => {
+  const [searchInput, setSearchInput] = useState("");
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10 ">
       {/* Left div */}
@@ -22,6 +25,8 @@ const Header = () => {
       {/* Middle one */}
       <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm">
         <input
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           className="pl-5 bg-transparent outline-none flex-grow text-gray-600 placeholder-gray-400"
           type="text"
           placeholder="Start your search"
@@ -37,6 +42,7 @@ const Header = () => {
           <UserCircleIcon className="h-6 cursor-pointer" />
         </div>
       </div>
+      {searchInput && <div></div>}
     </header>
   );
 };
