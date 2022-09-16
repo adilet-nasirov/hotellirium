@@ -10,11 +10,13 @@ import {
   UserCircleIcon,
   UsersIcon,
 } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 const Header = () => {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [nofGuests, setNofGuests] = useState(1);
+  const router = useRouter();
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
@@ -27,11 +29,21 @@ const Header = () => {
   const resetInput = () => {
     setSearchInput("");
   };
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    router.push({
+      pathname: '/search',
+      query:{
+        location: searchInput,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        nofGuests,
+      }
+    })
+  };
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10 ">
       {/* Left div */}
-      <div className="relative flex items-center h-10 cursor-pointer my-auto">
+      <div onClick={()=>router.push('/')} className="relative flex items-center h-10 cursor-pointer my-auto">
         <Image
           src="https://links.papareact.com/qd3"
           layout="fill"
