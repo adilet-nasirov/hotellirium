@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import moment from "moment/moment";
 import axios from "axios";
-
+import InfoCard from "../components/InfoCard";
 const options = {
   method: 'GET',
   url: 'https://airbnb19.p.rapidapi.com/api/v1/searchProperty',
@@ -25,12 +25,12 @@ function search() {
   const [data, setData] = useState([]);
   useEffect(()=>{
     axios.request(options).then(function (response) {
-      console.log(response.data);
-      setData(response.data)
+      setData(response.data.data)
     }).catch(function (error) {
       console.error(error);
     });
   },[])
+  console.log(data)
 
   return (
     <div className="h-screen">
@@ -47,6 +47,13 @@ function search() {
             <p className="button">Price</p>
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
+          </div>
+          <div>
+            {
+              data ? data.map(({bedrooms, title,beds, bathrooms,id,price,images,listingName,listingPreviewAmenityNames, listingGuestLabel,listingBathroomLabel,avgRating,listingBedLabel})=>(
+                <InfoCard key={id} title={title} price={price} images={images} bedrooms={bedrooms} beds={beds} bathrooms={bathrooms} listingName={listingName} listingGuestLabel ={listingGuestLabel} listingPreviewAmenityNames={listingPreviewAmenityNames} listingBathroomLabel ={listingBathroomLabel} avgRating={avgRating} listingBedLabel={listingBedLabel}/>
+              )) : ''
+            }
           </div>
         </section>
       </main>
