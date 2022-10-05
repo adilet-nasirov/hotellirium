@@ -1,4 +1,3 @@
-import  format  from "date-fns/format";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
@@ -6,38 +5,54 @@ import Header from "../components/Header";
 import moment from "moment/moment";
 import axios from "axios";
 import InfoCard from "../components/InfoCard";
-const options = {
-  method: 'GET',
-  url: 'https://airbnb19.p.rapidapi.com/api/v1/searchProperty',
-  params: {category: 'TAB_8225', totalRecords: '9', currency: 'USD', adults: '1'},
-  headers: {
-    'X-RapidAPI-Key': '9bbfb27703msh3a774eb1fd60944p16626fjsn37ae8f0e05c5',
-    'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com'
-  }
-};
 
 function search() {
   const router = useRouter();
-  const { endDate, location, nofGuests, startDate } = router.query;
-  const formattedStartDate = moment(startDate).utc().format('DD MMMM YY')
-  const formattedEndDate = moment(endDate).utc().format('DD MMMM YY')
+  const { endDate, startDate,location, id, nofGuests } = router.query;
+  const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
+  const formattedEndDate = moment(endDate).utc().format("DD MMMM YY");
   const range = `- ${formattedStartDate} - ${formattedEndDate} - `;
+  
+  const days = Math.floor((Date.parse(endDate) - Date.parse(startDate)) / 86400000);
   const [data, setData] = useState([]);
-  useEffect(()=>{
-    axios.request(options).then(function (response) {
-      setData(response.data.data)
-    }).catch(function (error) {
-      console.error(error);
-    });
-  },[])
-  console.log(data)
+  useEffect(() => {
+      if(!router.isReady) return;
+      const options = {
+        method: 'GET',
+        url: 'https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByPlace',
+        params: {
+          id: id,
+          display_name: location,
+          totalRecords: '10',
+          currency: 'USD',
+          adults:nofGuests
+        },
+        headers: {
+          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
+          "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+        },
+      };
+      setTimeout(() => {
+        axios
+        .request(options)
+        .then(function (response) {
+          console.log('API was called buddy')
+          setData(response.data.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        }); 
+      }, 500);
+  }, [router.isReady]);
 
   return (
-    <div className="h-screen">
-      <Header placeholder={`${location} | ${range} | ${nofGuests}`}/>
+    <div className="h-screen ">
+      <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
       <main className="flex">
         <section className="flex-grow pt-12 px-6">
-          <p className="text-xs mt-3">300+ stays {range}for {nofGuests} guests</p>
+          <p className="text-xs mt-3">
+            300+ stays {range}for {nofGuests} guests
+          </p>
           <h1 className="text-3xl font-semibold mb-6 mt-2">
             Stays in {location}
           </h1>
@@ -48,12 +63,47 @@ function search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
           </div>
-          <div>
-            {
-              data ? data.map(({bedrooms, title,beds, bathrooms,id,price,images,listingName,listingPreviewAmenityNames, listingGuestLabel,listingBathroomLabel,avgRating,listingBedLabel})=>(
-                <InfoCard key={id} title={title} price={price} images={images} bedrooms={bedrooms} beds={beds} bathrooms={bathrooms} listingName={listingName} listingGuestLabel ={listingGuestLabel} listingPreviewAmenityNames={listingPreviewAmenityNames} listingBathroomLabel ={listingBathroomLabel} avgRating={avgRating} listingBedLabel={listingBedLabel}/>
-              )) : ''
-            }
+          <div className="mx-auto">
+            {data
+              ? data.map(
+                  ({
+                    bedrooms,
+                    title,
+                    beds,
+                    bathrooms,
+                    id,
+                    price,
+                    discountedPrice,
+                    originalPrice,
+                    images,
+                    listingName,
+                    listingPreviewAmenityNames,
+                    listingGuestLabel,
+                    listingBathroomLabel,
+                    avgRating,
+                    listingBedLabel,
+                  }) => (
+                    <InfoCard
+                      days = {days}
+                      key={id}
+                      title={title}
+                      price={price}
+                      images={images}
+                      bedrooms={bedrooms}
+                      beds={beds}
+                      bathrooms={bathrooms}
+                      listingName={listingName}
+                      listingGuestLabel={listingGuestLabel}
+                      listingPreviewAmenityNames={listingPreviewAmenityNames}
+                      listingBathroomLabel={listingBathroomLabel}
+                      avgRating={avgRating}
+                      listingBedLabel={listingBedLabel}
+                      discountedPrice={discountedPrice}
+                      originalPrice={originalPrice}
+                    />
+                  )
+                )
+              : ""}
           </div>
         </section>
       </main>

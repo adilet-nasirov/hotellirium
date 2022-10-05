@@ -11,6 +11,7 @@ import {
   UsersIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Header = ({placeholder}) => {
   const [searchInput, setSearchInput] = useState("");
@@ -18,6 +19,7 @@ const Header = ({placeholder}) => {
   const [endDate, setEndDate] = useState(new Date());
   const [nofGuests, setNofGuests] = useState(1);
   const router = useRouter();
+  const axios = require('axios')
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
@@ -30,16 +32,34 @@ const Header = ({placeholder}) => {
   const resetInput = () => {
     setSearchInput("");
   };
+
   const handleSearch = () => {
-    router.push({
-      pathname: '/search',
-      query:{
-        location: searchInput,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        nofGuests,
+    const options = {
+      method: 'GET',
+      url: 'https://airbnb19.p.rapidapi.com/api/v1/searchDestination',
+      params: {query: searchInput},
+      headers: {
+        'X-RapidAPI-Key': process.env.NEXT_PUBLIC_API_KEY,
+        'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com'
       }
-    })
+    }
+    axios.request(options).then(function (response) {
+      console.log(response.data)
+      let display_name=response.data.data[0].display_name;
+      let  id= response.data.data[0].id;
+       router.push({
+         pathname: '/search',
+         query:{
+           location: display_name,
+           id : id,
+           startDate: startDate.toISOString(),
+           endDate: endDate.toISOString(),
+           nofGuests:nofGuests.toString(),
+         }
+       })
+    }).catch(function (error) {
+      console.error(error);
+    });
   };
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10 ">
