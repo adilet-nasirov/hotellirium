@@ -2,27 +2,27 @@ import React from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
-const InfoCard = ({
-  days,
-  bedrooms,
-  title,
-  beds,
-  bathrooms,
-  id,
-  discountedPrice,
-  originalPrice,
-  price,
-  images,
-  listingName,
-  listingPreviewAmenityNames,
-  listingGuestLabel,
-  listingBathroomLabel,
-  avgRating,
-  listingBedLabel,
-}) => {
-  console.log(days)
+function handleClick(id){
+  console.log(id)
+}
+const InfoCard = ({item, days}) => {
+  const { bedrooms,
+    title,
+    beds,
+    bathrooms,
+    id,
+    price,
+    discountedPrice,
+    originalPrice,
+    images,
+    listingName,
+    listingPreviewAmenityNames,
+    listingGuestLabel,
+    listingBathroomLabel,
+    avgRating,
+    listingBedLabel} = item;
   return (
-    <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-xl transition duration-200 ease-out first:border-t">
+    <div onClick={()=>handleClick(id)} className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-xl transition duration-200 ease-out first:border-t">
       <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
         <Image
           src={images[0]}

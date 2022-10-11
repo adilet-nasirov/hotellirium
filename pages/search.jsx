@@ -66,40 +66,10 @@ function search() {
           <div className="mx-auto">
             {data
               ? data.map(
-                  ({
-                    bedrooms,
-                    title,
-                    beds,
-                    bathrooms,
-                    id,
-                    price,
-                    discountedPrice,
-                    originalPrice,
-                    images,
-                    listingName,
-                    listingPreviewAmenityNames,
-                    listingGuestLabel,
-                    listingBathroomLabel,
-                    avgRating,
-                    listingBedLabel,
-                  }) => (
+                  (item) => (
                     <InfoCard
-                      days = {days}
-                      key={id}
-                      title={title}
-                      price={price}
-                      images={images}
-                      bedrooms={bedrooms}
-                      beds={beds}
-                      bathrooms={bathrooms}
-                      listingName={listingName}
-                      listingGuestLabel={listingGuestLabel}
-                      listingPreviewAmenityNames={listingPreviewAmenityNames}
-                      listingBathroomLabel={listingBathroomLabel}
-                      avgRating={avgRating}
-                      listingBedLabel={listingBedLabel}
-                      discountedPrice={discountedPrice}
-                      originalPrice={originalPrice}
+                      item={item}
+                      days={days}
                     />
                   )
                 )
