@@ -44,7 +44,6 @@ const Header = ({placeholder}) => {
       }
     }
     axios.request(options).then(function (response) {
-      console.log(response.data)
       let display_name=response.data.data[0].display_name;
       let  id= response.data.data[0].id;
        router.push({
@@ -81,7 +80,7 @@ const Header = ({placeholder}) => {
           type="text"
           placeholder={placeholder?.toUpperCase() || "Start your search"}
         />
-        <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md: mx-2 " />
+        <SearchIcon onClick={handleSearch} className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md: mx-2 " />
       </div>
       {/* Right div */}
       <div className="flex  space-x-4 items-center justify-end text-gray-500">
