@@ -1,6 +1,6 @@
-import { createContext,useReducer } from "react";
+import { createContext, useReducer } from "react";
 
-const GlobalContext = createContext([]);
+export const GlobalContext = createContext();
 const initialState={
     data: [],
     liked: [],
@@ -23,8 +23,9 @@ function reducer(state, action){
             return state;
     }
 }
-const [state,dispatch]=useReducer(reducer,initialState)
+
 export const GlobalProvider =({children})=>{
+    const [state,dispatch] = useReducer(reducer,initialState);
     <GlobalContext.Provider value={[state, dispatch]}>
         {children}
     </GlobalContext.Provider>

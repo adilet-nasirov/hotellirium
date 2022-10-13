@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
+import { GlobalContext } from "../GlobalState/Context";
+
 function handleClick(id){
   console.log(id)
 }
 const InfoCard = ({item, days}) => {
+  const value = useContext(GlobalContext);
+  console.log(value)
   const { bedrooms,
     title,
     beds,
