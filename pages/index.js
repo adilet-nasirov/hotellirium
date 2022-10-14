@@ -9,6 +9,7 @@ import exploreData from "./data-files/exploreData";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
 export default function Home() {
+  console.log('Hello')
   return (
     <div className={styles.container}>
       <Head>

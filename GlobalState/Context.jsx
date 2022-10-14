@@ -17,14 +17,14 @@ function reducer(state, action){
         case 'add_liked':
             return{
                 ...state,
-                liked: state.liked.push(action.payload)
+                liked: [...state.liked, action.payload]
             }
         default:
             return state;
     }
 }
 
-export const GlobalProvider =({children})=>{
+export const ContextProvider =({children}) => {
     const [state,dispatch] = useReducer(reducer,initialState);
     <GlobalContext.Provider value={[state, dispatch]}>
         {children}
