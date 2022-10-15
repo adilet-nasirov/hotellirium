@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import moment from "moment/moment";
 import axios from "axios";
 import InfoCard from "../components/InfoCard";
+import { DataContext } from "../lib/DataContext";
 
 function search() {
+  const [state, dispatch] = useContext(DataContext);
+  const {data} = state;
   const router = useRouter();
   const { endDate, startDate,location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
@@ -14,9 +17,9 @@ function search() {
   const range = `- ${formattedStartDate} - ${formattedEndDate} - `;
   
   const days = Math.floor((Date.parse(endDate) - Date.parse(startDate)) / 86400000);
-  const [data, setData] = useState([]);
   useEffect(() => {
       if(!router.isReady) return;
+      dispatch({type:'fetch_start'});
       const options = {
         method: 'GET',
         url: 'https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByPlace',
@@ -37,10 +40,12 @@ function search() {
         .request(options)
         .then(function (response) {
           console.log('API was called buddy')
-          setData(response.data.data);
+          dispatch({type:'fetch_success',payload: response.data.data})
+          // setData(response.data.data);
         })
         .catch(function (error) {
           console.error(error);
+          dispatch({type:'api_call_error'})
         }); 
       }, 500);
   }, [router.isReady]);
