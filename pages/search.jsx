@@ -6,48 +6,51 @@ import moment from "moment/moment";
 import axios from "axios";
 import InfoCard from "../components/InfoCard";
 import { DataContext } from "../lib/DataContext";
+import Maps from "../components/Maps";
 
 function search() {
   const [state, dispatch] = useContext(DataContext);
-  const {data} = state;
+  const { data } = state;
   const router = useRouter();
-  const { endDate, startDate,location, id, nofGuests } = router.query;
+  const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
   const formattedEndDate = moment(endDate).utc().format("DD MMMM YY");
   const range = `- ${formattedStartDate} - ${formattedEndDate} - `;
-  
-  const days = Math.floor((Date.parse(endDate) - Date.parse(startDate)) / 86400000);
+
+  const days = Math.floor(
+    (Date.parse(endDate) - Date.parse(startDate)) / 86400000
+  );
   useEffect(() => {
-      if(!router.isReady) return;
-      dispatch({type:'fetch_start'});
-      const options = {
-        method: 'GET',
-        url: 'https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByPlace',
-        params: {
-          id: id,
-          display_name: location,
-          totalRecords: '10',
-          currency: 'USD',
-          adults:nofGuests
-        },
-        headers: {
-          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-          "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
-        },
-      };
-      setTimeout(() => {
-        axios
+    if (!router.isReady) return;
+    dispatch({ type: "fetch_start" });
+    const options = {
+      method: "GET",
+      url: "https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByPlace",
+      params: {
+        id: id,
+        display_name: location,
+        totalRecords: "10",
+        currency: "USD",
+        adults: nofGuests,
+      },
+      headers: {
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
+        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+      },
+    };
+    setTimeout(() => {
+      axios
         .request(options)
         .then(function (response) {
-          console.log('API was called buddy')
-          dispatch({type:'fetch_success',payload: response.data.data})
+          console.log("API was called buddy");
+          dispatch({ type: "fetch_success", payload: response.data.data });
           // setData(response.data.data);
         })
         .catch(function (error) {
           console.error(error);
-          dispatch({type:'api_call_error'})
-        }); 
-      }, 500);
+          dispatch({ type: "api_call_error" });
+        });
+    }, 500);
   }, [router.isReady]);
 
   return (
@@ -70,16 +73,12 @@ function search() {
           </div>
           <div className="mx-auto">
             {data
-              ? data.map(
-                  (item) => (
-                    <InfoCard
-                      item={item}
-                      days={days}
-                    />
-                  )
-                )
+              ? data.map((item) => <InfoCard item={item} days={days} />)
               : ""}
           </div>
+        </section>
+        <section>
+          <Maps />
         </section>
       </main>
       <Footer />
