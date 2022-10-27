@@ -54,7 +54,7 @@ function search() {
   }, [router.isReady]);
 
   return (
-    <div className="h-screen ">
+    <div className="h-screen">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
       <main className="flex">
         <section className="flex-grow pt-12 px-6">
@@ -77,7 +77,7 @@ function search() {
               : ""}
           </div>
         </section>
-        <section>
+        <section className="hidden xl:inline-flex flex-grow xl:min-w-[600px]">
           <Maps />
         </section>
       </main>
