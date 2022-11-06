@@ -61,9 +61,12 @@ const Header = ({placeholder}) => {
     });
   };
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10 ">
+    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10">
       {/* Left div */}
-      <div onClick={()=>router.push('/')} className="relative flex items-center h-10 cursor-pointer my-auto">
+      <div
+        onClick={() => router.push("/")}
+        className="relative flex items-center h-10 cursor-pointer my-auto"
+      >
         <Image
           src="https://links.papareact.com/qd3"
           layout="fill"
@@ -80,7 +83,10 @@ const Header = ({placeholder}) => {
           type="text"
           placeholder={placeholder?.toUpperCase() || "Start your search"}
         />
-        <SearchIcon onClick={handleSearch} className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md: mx-2 " />
+        <SearchIcon
+          onClick={handleSearch}
+          className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md: mx-2 "
+        />
       </div>
       {/* Right div */}
       <div className="flex  space-x-4 items-center justify-end text-gray-500">

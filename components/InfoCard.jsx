@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
-function handleClick(id){
-  console.log(id)
+function handleClick(id) {
+  console.log(id);
 }
-function addToLiked(id){
-  console.log(id,'===> it is wishlisted')
+function addToLiked(id) {
+  console.log(id, "===> it is wishlisted");
 }
-const InfoCard = ({item, days}) => {
-  console.log(item)
-  const { bedrooms,
+const InfoCard = ({ item, days }) => {
+  const {
+    bedrooms,
     title,
     beds,
     bathrooms,
@@ -24,7 +24,8 @@ const InfoCard = ({item, days}) => {
     listingGuestLabel,
     listingBathroomLabel,
     avgRating,
-    listingBedLabel} = item;
+    listingBedLabel,
+  } = item;
   return (
     <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t">
       <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
@@ -38,9 +39,14 @@ const InfoCard = ({item, days}) => {
       <div className="flex flex-col flex-grow pl-5">
         <div className="flex justify-between">
           <p>{title}</p>
-          <HeartIcon onClick={()=>addToLiked(id)} className="h-7 cursor-pointer" />
+          <HeartIcon
+            onClick={() => addToLiked(id)}
+            className="h-7 cursor-pointer"
+          />
         </div>
-        <h4 onClick={()=>handleClick(id)} className="text-xl">{listingName}</h4>
+        <h4 onClick={() => handleClick(id)} className="text-xl">
+          {listingName}
+        </h4>
         <div className="border-b w-10 pt-2" />
         <p className="pt-2 text-sm text-gray-500 flex-grow">{`${listingGuestLabel}• ${bedrooms} bedroom • ${listingBedLabel} • ${listingBathroomLabel} • ${listingPreviewAmenityNames.join(
           "•"
@@ -54,9 +60,23 @@ const InfoCard = ({item, days}) => {
 
           <div>
             <p className="text-lg font-semibold pb-2 lg:text-2xl">
-              {price ? price : <span><del>{originalPrice}</del> {discountedPrice}</span>} / night
+              {price ? (
+                price
+              ) : (
+                <span>
+                  <del>{originalPrice}</del> {discountedPrice}
+                </span>
+              )}{" "}
+              / night
             </p>
-            <p>${price ? Number(price.slice(1,price.length))*days : days*Number(discountedPrice.slice(1,discountedPrice.length))} total</p>
+            <p>
+              $
+              {price
+                ? Number(price.slice(1, price.length)) * days
+                : days *
+                  Number(discountedPrice.slice(1, discountedPrice.length))}{" "}
+              total
+            </p>
           </div>
         </div>
       </div>

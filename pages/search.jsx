@@ -54,10 +54,10 @@ function search() {
   }, [router.isReady]);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-col max-w-screen-2xl mx-auto">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
-      <main className="flex">
-        <section className="flex-grow pt-12 px-6">
+      <main className="">
+        <section className=" pt-12 px-6">
           <p className="text-xs mt-3">
             300+ stays {range}for {nofGuests} guests
           </p>
@@ -71,14 +71,11 @@ function search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
           </div>
-          <div className="mx-auto">
+          <div>
             {data
               ? data.map((item) => <InfoCard item={item} days={days} />)
               : ""}
           </div>
-        </section>
-        <section className="hidden xl:inline-flex flex-grow xl:min-w-[600px]">
-          <Maps />
         </section>
       </main>
       <Footer />
