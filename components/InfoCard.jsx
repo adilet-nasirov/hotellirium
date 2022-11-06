@@ -1,19 +1,42 @@
 import React from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/outline";
+import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
 import { StarIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 function handleClick(id) {
   console.log(id);
 }
-function addToLiked(id) {
-  console.log(id, "===> it is wishlisted");
+function addToLiked(itemData, localData, setLiked) {
+  const { id } = itemData;
+  if (!localData) {
+    localStorage.setItem("wishlisted", JSON.stringify([itemData]));
+    setLiked([itemData]);
+  } else {
+    let isAlreadyInWishlist = checkIfInLocal(localData, id);
+    if (isAlreadyInWishlist) {
+      let newLocalData = localData.filter((el) => el.id !== id);
+      localStorage.setItem("wishlisted", JSON.stringify([...newLocalData]));
+      setLiked(newLocalData);
+    } else {
+      localStorage.setItem(
+        "wishlisted",
+        JSON.stringify([...localData, itemData])
+      );
+      setLiked([...localData, itemData]);
+    }
+  }
+}
+function checkIfInLocal(data, id) {
+  for (let item of data) {
+    if (item.id === id) return true;
+  }
+  return false;
 }
 const InfoCard = ({ item, days }) => {
   const {
     bedrooms,
     title,
-    beds,
-    bathrooms,
     id,
     price,
     discountedPrice,
@@ -26,6 +49,9 @@ const InfoCard = ({ item, days }) => {
     avgRating,
     listingBedLabel,
   } = item;
+  const localData = JSON.parse(localStorage.getItem("wishlisted"));
+  const [liked, setLiked] = useState(localData);
+  let isWishlisted = checkIfInLocal(localData, id);
   return (
     <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t">
       <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
@@ -39,10 +65,17 @@ const InfoCard = ({ item, days }) => {
       <div className="flex flex-col flex-grow pl-5">
         <div className="flex justify-between">
           <p>{title}</p>
-          <HeartIcon
-            onClick={() => addToLiked(id)}
-            className="h-7 cursor-pointer"
-          />
+          {isWishlisted ? (
+            <LikedIcon
+              onClick={() => addToLiked(item, localData, setLiked)}
+              className="h-7 cursor-pointer text-red-500"
+            />
+          ) : (
+            <HeartIcon
+              onClick={() => addToLiked(item, localData, setLiked)}
+              className="h-7 cursor-pointer"
+            />
+          )}
         </div>
         <h4 onClick={() => handleClick(id)} className="text-xl">
           {listingName}
