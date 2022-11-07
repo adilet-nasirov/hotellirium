@@ -3,6 +3,7 @@ import Image from "next/image";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import BasicPopover from "./Popover";
 import {
   SearchIcon,
   GlobeAltIcon,
@@ -13,13 +14,13 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const Header = ({placeholder}) => {
+const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [nofGuests, setNofGuests] = useState(1);
   const router = useRouter();
-  const axios = require('axios')
+  const axios = require("axios");
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
@@ -35,30 +36,33 @@ const Header = ({placeholder}) => {
 
   const handleSearch = () => {
     const options = {
-      method: 'GET',
-      url: 'https://airbnb19.p.rapidapi.com/api/v1/searchDestination',
-      params: {query: searchInput},
+      method: "GET",
+      url: "https://airbnb19.p.rapidapi.com/api/v1/searchDestination",
+      params: { query: searchInput },
       headers: {
-        'X-RapidAPI-Key': process.env.NEXT_PUBLIC_API_KEY,
-        'X-RapidAPI-Host': 'airbnb19.p.rapidapi.com'
-      }
-    }
-    axios.request(options).then(function (response) {
-      let display_name=response.data.data[0].display_name;
-      let  id= response.data.data[0].id;
-       router.push({
-         pathname: '/search',
-         query:{
-           location: display_name,
-           id : id,
-           startDate: startDate.toISOString(),
-           endDate: endDate.toISOString(),
-           nofGuests:nofGuests.toString(),
-         }
-       })
-    }).catch(function (error) {
-      console.error(error);
-    });
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
+        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+      },
+    };
+    axios
+      .request(options)
+      .then(function (response) {
+        let display_name = response.data.data[0].display_name;
+        let id = response.data.data[0].id;
+        router.push({
+          pathname: "/search",
+          query: {
+            location: display_name,
+            id: id,
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString(),
+            nofGuests: nofGuests.toString(),
+          },
+        });
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   };
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-3 md:px-10">
@@ -92,10 +96,11 @@ const Header = ({placeholder}) => {
       <div className="flex  space-x-4 items-center justify-end text-gray-500">
         <p className="cursor-pointer hidden md:inline">Become a host</p>
         <GlobeAltIcon className="h-6 " />
-        <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
+        {/* <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
           <MenuIcon className="h-6 cursor-pointer" />
           <UserCircleIcon className="h-6 cursor-pointer" />
-        </div>
+        </div> */}
+        <BasicPopover />
       </div>
       {searchInput && (
         <div className="flex flex-col col-span-3 mx-auto">

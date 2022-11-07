@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@heroicons/react": "^1.0.6",
+    "@mui/material": "^5.10.12",
     "axios": "^0.27.2",
     "date-fns": "^2.29.3",
     "mapbox-gl": "^2.10.0",
