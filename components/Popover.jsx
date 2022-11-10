@@ -1,11 +1,16 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { MenuIcon, UserCircleIcon } from "@heroicons/react/solid";
+import { BiTrip } from "react-icons/bi";
+import { FcLike } from "react-icons/fc";
+import { BiLogOut } from "react-icons/bi";
+import { IoIosHelpCircle } from "react-icons/io";
+import { MdManageAccounts } from "react-icons/md";
+import { MenuIcon, UserCircleIcon, EnvelopeIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const router = useRouter();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -36,20 +41,72 @@ export default function BasicPopover() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "right",
         }}
       >
-        <Typography sx={{ p: 2 }}>Messages</Typography>
-        <Typography sx={{ p: 2 }}>Notifications</Typography>
-        <Typography sx={{ p: 2 }}>Trips</Typography>
-        <Typography sx={{ p: 2 }}>Wishlist</Typography>
-        <Typography sx={{ p: 2 }}>Account</Typography>
-        <Typography sx={{ p: 2 }}>Help</Typography>
-        <Typography sx={{ p: 2 }}>Log out</Typography>
+        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+            />
+          </svg>
+
+          <Typography sx={{ p: 2 }}> Messages</Typography>
+        </div>
+        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5"
+            />
+          </svg>
+
+          <Typography sx={{ p: 2 }}>Notifications</Typography>
+        </div>
+        <div className="flex items-center justify-start px-7 w-48 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <BiTrip size={24} />
+          <Typography sx={{ p: 2 }}>Trips</Typography>
+        </div>
+        <div
+          onClick={() => router.push("/wishlist")}
+          className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out"
+        >
+          <FcLike size={24} />
+          <Typography sx={{ p: 2 }}>Wishlist</Typography>
+        </div>
+        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <MdManageAccounts size={24} />
+          <Typography sx={{ p: 2 }}>Account</Typography>
+        </div>
+        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <IoIosHelpCircle size={24} />
+          <Typography sx={{ p: 2 }}>Help</Typography>
+        </div>
+        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+          <BiLogOut size={24} />
+          <Typography sx={{ p: 2 }}>Log out</Typography>
+        </div>
       </Popover>
     </div>
   );
