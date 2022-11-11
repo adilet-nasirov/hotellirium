@@ -4,9 +4,7 @@ import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
 import { StarIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-function handleClick(id) {
-  console.log(id);
-}
+import { Router, useRouter } from "next/router";
 function checkIfInLocal(id) {
   let localData = JSON.parse(localStorage.getItem("wishlisted"));
   for (let item of localData) {
@@ -15,6 +13,7 @@ function checkIfInLocal(id) {
   return false;
 }
 const InfoCard = ({ item, days }) => {
+  const router = useRouter();
   const {
     bedrooms,
     title,
@@ -85,7 +84,7 @@ const InfoCard = ({ item, days }) => {
             />
           )}
         </div>
-        <h4 onClick={() => handleClick(id)} className="text-xl">
+        <h4 onClick={() => router.push(`/${id}`)} className="text-xl">
           {listingName}
         </h4>
         <div className="border-b w-10 pt-2" />
