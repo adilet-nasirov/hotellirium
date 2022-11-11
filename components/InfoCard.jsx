@@ -7,28 +7,9 @@ import { useState } from "react";
 function handleClick(id) {
   console.log(id);
 }
-function addToLiked(itemData, localData, setLiked) {
-  const { id } = itemData;
-  if (!localData) {
-    localStorage.setItem("wishlisted", JSON.stringify([itemData]));
-    setLiked([itemData]);
-  } else {
-    let isAlreadyInWishlist = checkIfInLocal(localData, id);
-    if (isAlreadyInWishlist) {
-      let newLocalData = localData.filter((el) => el.id !== id);
-      localStorage.setItem("wishlisted", JSON.stringify([...newLocalData]));
-      setLiked(newLocalData);
-    } else {
-      localStorage.setItem(
-        "wishlisted",
-        JSON.stringify([...localData, itemData])
-      );
-      setLiked([...localData, itemData]);
-    }
-  }
-}
-function checkIfInLocal(data, id) {
-  for (let item of data) {
+function checkIfInLocal(id) {
+  let localData = JSON.parse(localStorage.getItem("wishlisted"));
+  for (let item of localData) {
     if (item.id === id) return true;
   }
   return false;
@@ -50,11 +31,35 @@ const InfoCard = ({ item, days }) => {
     listingBedLabel,
   } = item;
   const localData = JSON.parse(localStorage.getItem("wishlisted"));
-  const [liked, setLiked] = useState(localData);
-  let isWishlisted = checkIfInLocal(liked, id);
+  const [data, setData] = useState(localData);
+  function addToLiked(itemData) {
+    const dataFromStorage = JSON.parse(localStorage.getItem("wishlisted"));
+    const { id } = itemData;
+    if (!dataFromStorage) {
+      localStorage.setItem("wishlisted", JSON.stringify([itemData]));
+      setData([itemData]);
+    } else {
+      let isAlreadyInWishlist = checkIfInLocal(id);
+      if (isAlreadyInWishlist) {
+        let newdataFromStorage = dataFromStorage.filter((el) => el.id !== id);
+        localStorage.setItem(
+          "wishlisted",
+          JSON.stringify([...newdataFromStorage])
+        );
+        setData(newdataFromStorage);
+      } else {
+        localStorage.setItem(
+          "wishlisted",
+          JSON.stringify([...dataFromStorage, itemData])
+        );
+        setData([...dataFromStorage, itemData]);
+      }
+    }
+  }
+  let isWishlisted = checkIfInLocal(id);
   return (
     <div
-      className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
+      className="flex py-7 px-10 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
       key={id}
     >
       <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
@@ -70,12 +75,12 @@ const InfoCard = ({ item, days }) => {
           <p>{title}</p>
           {isWishlisted ? (
             <LikedIcon
-              onClick={() => addToLiked(item, localData, setLiked)}
+              onClick={() => addToLiked(item)}
               className="h-7 cursor-pointer text-red-500"
             />
           ) : (
             <HeartIcon
-              onClick={() => addToLiked(item, localData, setLiked)}
+              onClick={() => addToLiked(item)}
               className="h-7 cursor-pointer"
             />
           )}
