@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 import moment from "moment/moment";
 import axios from "axios";
-import InfoCard from "../components/InfoCard";
-import { DataContext } from "../lib/DataContext";
-import Maps from "../components/Maps";
+import InfoCard from "../../components/InfoCard";
+import { DataContext } from "../../lib/DataContext";
 
 function search() {
   const [state, dispatch] = useContext(DataContext);
