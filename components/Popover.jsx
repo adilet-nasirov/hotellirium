@@ -24,9 +24,6 @@ export default function BasicPopover() {
 
   return (
     <div>
-      {/* <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Open Popover
-      </Button> */}
       <div
         onClick={handleClick}
         className="flex items-center space-x-2 border-2 p-2 rounded-full hover:shadow-md"
