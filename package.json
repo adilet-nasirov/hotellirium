@@ -23,6 +23,7 @@
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
+    "react-image-gallery": "^1.2.11",
     "react-map-gl": "^7.0.19",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
