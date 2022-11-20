@@ -84,7 +84,7 @@ const InfoCard = ({ item, days }) => {
             />
           )}
         </div>
-        <h4 onClick={() => router.push(`/${id}`)} className="text-xl">
+        <h4 onClick={() => router.push(`search/${id}`)} className="text-xl">
           {listingName}
         </h4>
         <div className="border-b w-10 pt-2" />
