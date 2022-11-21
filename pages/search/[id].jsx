@@ -41,10 +41,10 @@ const Details = () => {
           <div className="flex basis-1/2">
             {item.avgRating && (
               <h3
-                className="flex items-top mx-3 cursor-pointer text-xl
+                className="flex items-center mx-3 cursor-pointer text-xl
               "
               >
-                <FaStar size={20} className="mx-1" />
+                <FaStar size={20} className="mx-1 text-rose-500" />
                 {item.avgRating}
               </h3>
             )}
@@ -124,10 +124,12 @@ const Details = () => {
               </h1>
               <div>
                 <h3
-                  className="flex items-top mx-3 cursor-pointer text-xl
+                  className="flex items-center mx-3 cursor-pointer text-xl
               "
                 >
-                  {item.avgRating && <FaStar size={20} className="mx-1" />}
+                  {item.avgRating && (
+                    <FaStar size={20} className="mx-1  text-rose-500" />
+                  )}
                   {item.avgRating}
                   <span className="underline mx-4 cursor-pointer text-xl">
                     {item.reviewsCount} reviews

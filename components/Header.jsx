@@ -83,7 +83,7 @@ const Header = ({ placeholder }) => {
           />
           <SearchIcon
             onClick={handleSearch}
-            className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md: mx-2 "
+            className="hidden md:inline-flex h-8 bg-rose-500 text-white rounded-full p-2 cursor-pointer md: mx-2 "
           />
         </div>
         {/* Right div */}
@@ -114,14 +114,17 @@ const Header = ({ placeholder }) => {
                 onChange={(e) => setNofGuests(e.target.value)}
                 type="number"
                 min={1}
-                className="w-12 pl-2 text-lg outline-none text-red-400"
+                className="w-12 pl-2 text-lg outline-none  text-rose-500"
               />
             </div>
             <div className="flex">
               <button onClick={resetInput} className="flex-grow text-gray-500">
                 Cancel
               </button>
-              <button onClick={handleSearch} className="flex-grow text-red-400">
+              <button
+                onClick={handleSearch}
+                className="flex-grow text-rose-500"
+              >
                 Search
               </button>
             </div>
