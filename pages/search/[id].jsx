@@ -152,10 +152,7 @@ const Details = () => {
               />
             </div>
             <div className="my-5">
-              <button
-                onClick={() => router.push(`/checkout`)}
-                class="bg-rose-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded w-full"
-              >
+              <button class="bg-rose-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded w-full">
                 Reserve
               </button>
             </div>
