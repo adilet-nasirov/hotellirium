@@ -1,23 +1,23 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 async function CreateStripeSession(req, res) {
-  const { item } = req.body;
-
+  const { item, days } = req.body;
+  const price = parseInt(item.price.slice(1));
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://stripe-checkout-next-js-demo.vercel.app";
 
   const transformedItem = {
-    quantity: 2,
+    quantity: days,
     price_data: {
       currency: "usd",
       product_data: {
         images: [item.images[0]],
         name: item.listingName,
-        description: "reserve the hotel",
+        description: "Reserve this hotel",
       },
-      unit_amount: 120 * 100,
+      unit_amount: price * 100,
     },
   };
 

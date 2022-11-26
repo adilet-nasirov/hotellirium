@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { DataContext } from "../../lib/DataContext";
 import Header from "../../components/Header";
@@ -24,16 +24,18 @@ const Details = () => {
   const router = useRouter();
   const { id } = router.query;
   const [state, dispatch] = useContext(DataContext);
-  const [nofGuests, setNofGuests] = useState(1);
-  const { data } = state;
+  const { data, days, guests } = state;
+  const [nofGuests, setNofGuests] = useState(guests);
   const [loading, setLoading] = useState(false);
-  console.log(data);
+
   const filtered = data.filter((el) => el.id === id);
   const item = filtered[0];
   const images = [];
-  for (let image of item.images) {
-    images.push({ original: image, thumbnail: image });
-  }
+  useEffect(() => {
+    for (let image of item.images) {
+      images.push({ original: image, thumbnail: image });
+    }
+  }, []);
 
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
   const stripePromise = loadStripe(publishableKey);
@@ -42,6 +44,8 @@ const Details = () => {
     const stripe = await stripePromise;
     const checkoutSession = await axios.post("/api/create-stripe-session", {
       item: item,
+      days: days,
+      guests: guests,
     });
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.id,
@@ -165,7 +169,10 @@ const Details = () => {
               <UsersIcon className="h-7" />
               <input
                 value={nofGuests}
-                onChange={(e) => setNofGuests(e.target.value)}
+                onChange={(e) => {
+                  dispatch({ type: "change_guests", guests: e.target.value });
+                  setNofGuests(e.target.value);
+                }}
                 type="number"
                 min={1}
                 className="w-12 pl-2 text-lg font-semibold outline-none text-rose-500"
@@ -181,8 +188,11 @@ const Details = () => {
             </div>
             {/* prices */}
             <div className="flex justify-between">
-              <p className="underline"> {item.price} x nights</p>
-              <p>$</p>
+              <p className="underline">
+                {" "}
+                {item.price} x {days} nights
+              </p>
+              <p>${parseInt(item.price?.slice(1)) * days}</p>
             </div>
             <div className="flex justify-between">
               <p className="underline">Cleaning fee</p>
@@ -190,7 +200,7 @@ const Details = () => {
             </div>
             <div className="flex justify-between">
               <p className="underline">Service fee</p>
-              <p>$121</p>
+              <p>$12</p>
             </div>
           </aside>
         </div>

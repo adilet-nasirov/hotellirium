@@ -5,13 +5,15 @@ import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-
+import { useContext } from "react";
+import { DataContext } from "../lib/DataContext";
 export default function ResponsiveDatePickers() {
   let today = new Date().toISOString().slice(0, 10);
-
+  const [state, dispatch] = useContext(DataContext);
+  const { days, date_in, date_out } = state;
+  console.log(state);
   const [value1, setValue1] = React.useState(dayjs(today));
   const [value2, setValue2] = React.useState(dayjs(value1));
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={3}>

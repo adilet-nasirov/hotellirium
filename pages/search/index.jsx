@@ -28,7 +28,7 @@ function search() {
       params: {
         id: id,
         display_name: location,
-        totalRecords: "10",
+        totalRecords: "15",
         currency: "USD",
         adults: nofGuests,
       },
@@ -42,7 +42,14 @@ function search() {
         .request(options)
         .then(function (response) {
           console.log("API was called buddy");
-          dispatch({ type: "fetch_success", payload: response.data.data });
+          dispatch({
+            type: "fetch_success",
+            payload: response.data.data,
+            days: days,
+            guests: nofGuests,
+            date_in: startDate,
+            date_out: endDate,
+          });
           // setData(response.data.data);
         })
         .catch(function (error) {
