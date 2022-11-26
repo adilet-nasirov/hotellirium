@@ -10,6 +10,8 @@ import { IoMdHeartEmpty, IoMdSnow } from "react-icons/io";
 import { CgGym } from "react-icons/cg";
 import { UsersIcon } from "@heroicons/react/solid";
 import ImageGallery from "react-image-gallery";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import {
   MdLocalLaundryService,
   MdOutlineLocalConvenienceStore,
@@ -24,6 +26,7 @@ const Details = () => {
   const [state, dispatch] = useContext(DataContext);
   const [nofGuests, setNofGuests] = useState(1);
   const { data } = state;
+  const [loading, setLoading] = useState(false);
   console.log(data);
   const filtered = data.filter((el) => el.id === id);
   const item = filtered[0];
@@ -31,6 +34,23 @@ const Details = () => {
   for (let image of item.images) {
     images.push({ original: image, thumbnail: image });
   }
+
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  const stripePromise = loadStripe(publishableKey);
+  const createCheckoutSession = async () => {
+    setLoading(true);
+    const stripe = await stripePromise;
+    const checkoutSession = await axios.post("/api/create-stripe-session", {
+      item: item,
+    });
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    if (result.error) {
+      alert(result.error.message);
+    }
+    setLoading(false);
+  };
   return (
     <div>
       <Header />
@@ -152,7 +172,10 @@ const Details = () => {
               />
             </div>
             <div className="my-5">
-              <button class="bg-rose-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded w-full">
+              <button
+                onClick={createCheckoutSession}
+                class="bg-rose-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded w-full"
+              >
                 Reserve
               </button>
             </div>

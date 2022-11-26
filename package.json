@@ -13,8 +13,10 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@heroicons/react": "^1.0.6",
+    "@mui/icons-material": "^5.10.15",
     "@mui/material": "^5.10.12",
     "@mui/x-date-pickers": "^5.0.8",
+    "@stripe/stripe-js": "^1.18.0",
     "axios": "^0.27.2",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.6",
@@ -27,6 +29,7 @@
     "react-icons": "^4.6.0",
     "react-image-gallery": "^1.2.11",
     "react-map-gl": "^7.0.19",
+    "stripe": "^8.176.0",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
