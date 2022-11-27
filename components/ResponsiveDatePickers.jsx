@@ -2,6 +2,7 @@ import * as React from "react";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -12,8 +13,8 @@ export default function ResponsiveDatePickers() {
   const [state, dispatch] = useContext(DataContext);
   const { days, date_in, date_out } = state;
   console.log(state);
-  const [value1, setValue1] = React.useState(dayjs(today));
-  const [value2, setValue2] = React.useState(dayjs(value1));
+  const [value1, setValue1] = useState(dayjs(date_in));
+  const [value2, setValue2] = useState(dayjs(date_out));
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={3}>

@@ -2,7 +2,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 async function CreateStripeSession(req, res) {
   const { item, days } = req.body;
-  const price = parseInt(item.price.slice(1));
+  const price = parseInt(item.price.slice(1)) + 42;
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"

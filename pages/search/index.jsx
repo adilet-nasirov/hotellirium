@@ -16,9 +16,10 @@ function search() {
   const formattedEndDate = moment(endDate).utc().format("DD MMMM YY");
   const range = `- ${formattedStartDate} - ${formattedEndDate} - `;
 
-  const days = Math.floor(
+  let days = Math.floor(
     (Date.parse(endDate) - Date.parse(startDate)) / 86400000
   );
+  if (!days) days = 1;
   useEffect(() => {
     if (!router.isReady) return;
     dispatch({ type: "fetch_start" });
