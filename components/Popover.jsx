@@ -1,16 +1,20 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import { BiTrip } from "react-icons/bi";
 import { FcLike } from "react-icons/fc";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiLogIn, BiTrip } from "react-icons/bi";
 import { IoIosHelpCircle } from "react-icons/io";
 import { MdManageAccounts } from "react-icons/md";
-import { MenuIcon, UserCircleIcon, EnvelopeIcon } from "@heroicons/react/solid";
+import { auth } from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
+import { MenuIcon, UserCircleIcon, EnvelopeIcon } from "@heroicons/react/solid";
+import { Avatar } from "@mui/material";
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+  console.log(user);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -24,12 +28,17 @@ export default function BasicPopover() {
 
   return (
     <div>
-      <div
-        onClick={handleClick}
-        className="flex items-center space-x-2 border-2 p-2 rounded-full hover:shadow-md"
-      >
-        <MenuIcon className="h-6 cursor-pointer" />
-        <UserCircleIcon className="h-6 cursor-pointer" />
+      <div onClick={handleClick} className="cursor-pointer">
+        {user ? (
+          <div>
+            <Avatar alt={user.displayName} src={user.photoURL} />
+          </div>
+        ) : (
+          <div className="flex items-center space-x-2 border-2 p-2 rounded-full ">
+            <MenuIcon className="h-6 cursor-pointer" />
+            <UserCircleIcon className="h-6 cursor-pointer" />
+          </div>
+        )}
       </div>
       <Popover
         id={id}
@@ -100,9 +109,25 @@ export default function BasicPopover() {
           <IoIosHelpCircle size={24} />
           <Typography sx={{ p: 2 }}>Help</Typography>
         </div>
-        <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
-          <BiLogOut size={24} />
-          <Typography sx={{ p: 2 }}>Log out</Typography>
+        <div>
+          {user ? (
+            <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+              <BiLogOut size={24} />
+              <Typography sx={{ p: 2 }} onClick={() => auth.signOut()}>
+                Log out
+              </Typography>
+            </div>
+          ) : (
+            <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
+              <BiLogIn size={24} />
+              <Typography
+                sx={{ p: 2 }}
+                onClick={() => router.push("/auth/login")}
+              >
+                Sign in
+              </Typography>
+            </div>
+          )}
         </div>
       </Popover>
     </div>
