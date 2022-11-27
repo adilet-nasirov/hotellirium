@@ -9,7 +9,8 @@ import { DataContext } from "../../lib/DataContext";
 
 function search() {
   const [state, dispatch] = useContext(DataContext);
-  const { data } = state;
+  const { data, user } = state;
+  console.log(user);
   const router = useRouter();
   const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
