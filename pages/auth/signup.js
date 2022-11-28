@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 
 import LoginForm from "../../components/LoginForm";
+import SignupForm from "../../components/SignupForm";
 
 export default function login() {
   const route = useRouter();
@@ -80,7 +81,7 @@ export default function login() {
           </div>
           <p className="text-center pt-2">- OR -</p>
         </div>
-        <LoginForm />
+        <SignupForm />
       </div>
     </main>
   );
