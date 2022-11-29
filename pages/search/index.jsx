@@ -10,7 +10,6 @@ import { DataContext } from "../../lib/DataContext";
 function search() {
   const [state, dispatch] = useContext(DataContext);
   const { data, user } = state;
-  console.log(user);
   const router = useRouter();
   const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
@@ -52,6 +51,7 @@ function search() {
             date_in: startDate,
             date_out: endDate,
           });
+          console.log(response.data.data);
           // setData(response.data.data);
         })
         .catch(function (error) {
@@ -62,9 +62,9 @@ function search() {
   }, [router.isReady]);
 
   return (
-    <div className="h-screen flex flex-col max-w-screen-2xl mx-auto">
+    <div className="h-screen ">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
-      <main className="">
+      <main className="max-w-7xl mx-auto">
         <section className=" pt-12 px-6">
           <p className="text-xs mt-3">
             300+ stays {range}for {nofGuests} guests

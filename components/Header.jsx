@@ -15,7 +15,6 @@ const Header = ({ placeholder }) => {
   const [nofGuests, setNofGuests] = useState(1);
   const router = useRouter();
   const [state, dispatch] = useContext(DataContext);
-  console.log(state.user);
   const axios = require("axios");
   const selectionRange = {
     startDate: startDate,

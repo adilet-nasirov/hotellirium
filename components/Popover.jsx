@@ -14,7 +14,6 @@ export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
-  console.log(user);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
