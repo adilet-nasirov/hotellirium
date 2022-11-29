@@ -45,7 +45,8 @@ export default function Home() {
               }
               sx={{ m: 1, fontSize: 16 }}
             >
-              Payment Successful!
+              Payment Successful! More information and guidelines will be sent
+              via email.
             </Alert>
           </Collapse>
         </Box>

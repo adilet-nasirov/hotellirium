@@ -21,7 +21,12 @@ export default function BasicPopover() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const logout = () => {
+    setTimeout(() => {
+      auth.signOut();
+      setAnchorEl(null);
+    }, 1000);
+  };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
@@ -112,7 +117,7 @@ export default function BasicPopover() {
           {user ? (
             <div className="flex items-center justify-start px-7 w-52 space-x-2 cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
               <BiLogOut size={24} />
-              <Typography sx={{ p: 2 }} onClick={() => auth.signOut()}>
+              <Typography sx={{ p: 2 }} onClick={logout}>
                 Log out
               </Typography>
             </div>

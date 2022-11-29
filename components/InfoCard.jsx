@@ -95,7 +95,7 @@ const InfoCard = ({ item, days }) => {
         <div className="flex justify-between items-end pt-5">
           <p className="flex items-center">
             <StarIcon className="h-5 text-red-500" />
-            {avgRating}
+            {avgRating ? avgRating : "4.3"}
           </p>
 
           <div>
