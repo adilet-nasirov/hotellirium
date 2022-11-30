@@ -12,7 +12,7 @@ export default function ResponsiveDatePickers() {
   let today = new Date().toISOString().slice(0, 10);
   const [state, dispatch] = useContext(DataContext);
   const { days, date_in, date_out } = state;
-  console.log(state);
+  // console.log(state);
   const [value1, setValue1] = useState(dayjs(date_in));
   const [value2, setValue2] = useState(dayjs(date_out));
   return (

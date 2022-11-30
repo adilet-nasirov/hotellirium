@@ -19,7 +19,7 @@ function search() {
   let days = Math.floor(
     (Date.parse(endDate) - Date.parse(startDate)) / 86400000
   );
-  if (!days) days = 1;
+  if (days <= 0) days = 1;
   useEffect(() => {
     if (!router.isReady) return;
     dispatch({ type: "fetch_start" });
