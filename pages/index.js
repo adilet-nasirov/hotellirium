@@ -32,7 +32,7 @@ export default function Home() {
         <Box sx={{ width: "100%" }}>
           <Collapse in={open}>
             <Alert
-              variant="filled"
+              // variant="filled"
               severity="success"
               action={
                 <IconButton
@@ -40,7 +40,7 @@ export default function Home() {
                     setOpen(false);
                   }}
                 >
-                  <CloseIcon sx={{ color: grey["A100"] }} />
+                  <CloseIcon color="inherit" size="small" />
                 </IconButton>
               }
               sx={{ m: 1, fontSize: 16 }}
