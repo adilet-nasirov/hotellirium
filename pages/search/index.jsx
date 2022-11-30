@@ -9,7 +9,7 @@ import { DataContext } from "../../lib/DataContext";
 
 function Search() {
   const [state, dispatch] = useContext(DataContext);
-  const [stateData, setData] = useState([]);
+  const [data, setData] = useState([]);
   const router = useRouter();
   const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
@@ -80,8 +80,8 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {stateData
-              ? stateData.map((item) => (
+            {data
+              ? data.map((item) => (
                   <InfoCard item={item} days={days} key={item.id} />
                 ))
               : ""}
