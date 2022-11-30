@@ -1,21 +1,22 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
 import { useContext } from "react";
-import { DataContext } from "../../lib/DataContext";
+import { DataContext } from "../../../lib/DataContext";
 import {
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../../utils/firebase";
+import { auth } from "../../../utils/firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 
 import React, { useState } from "react";
 
-import LoginForm from "../../components/LoginForm";
+import LoginForm from "../../../components/LoginForm";
+import SignupForm from "../../../components/SignupForm";
 
 export default function login() {
   const route = useRouter();
@@ -58,7 +59,7 @@ export default function login() {
 
   return (
     <main className="flex justify-center items-center">
-      <div className="shadow-xl mt-32 p-10 text-gray-700 rounded-lg md:w-1/3 w-96  ">
+      <div className="shadow-xl mt-32 p-10 text-gray-700 rounded-lg  md:w-1/3 w-96 ">
         <h2 className="text-3xl font-medium">Join today</h2>
         <div className="py-4">
           <h3 className="py-4">Sign in with one of the providers</h3>
@@ -80,7 +81,7 @@ export default function login() {
           </div>
           <p className="text-center pt-2">- OR -</p>
         </div>
-        <LoginForm />
+        <SignupForm />
       </div>
     </main>
   );
