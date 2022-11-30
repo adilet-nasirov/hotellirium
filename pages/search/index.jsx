@@ -52,7 +52,7 @@ function Search() {
             date_out: endDate,
           });
           // console.log(response.data.data);
-          // setData(response.data.data);
+          setData(response.data.data);
         })
         .catch(function (error) {
           console.error(error);
