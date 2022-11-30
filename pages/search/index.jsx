@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import moment from "moment/moment";
@@ -35,7 +35,7 @@ function Search() {
       },
       headers: {
         "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
     setTimeout(() => {
@@ -58,7 +58,7 @@ function Search() {
           console.error(error);
           dispatch({ type: "api_call_error" });
         });
-    }, 500);
+    }, 1000);
   }, [router.isReady]);
 
   return (

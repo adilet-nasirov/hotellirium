@@ -37,7 +37,7 @@ const Details = () => {
       params: { propertyId: id, currency: "USD" },
       headers: {
         "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
 
@@ -112,10 +112,15 @@ const Details = () => {
                 </p>
               </div>
             </div>
-            <div className="mx-auto my-12">
-              <ImageGallery showBullets={true} autoPlay={true} items={images} />
+            <div className="mx-auto my-12 h-screen">
+              <ImageGallery
+                lazyLoad={true}
+                showBullets={true}
+                autoPlay={true}
+                items={images}
+              />
             </div>
-            <div className="flex justify-between mx-auto">
+            <div className="flex justify-between mx-auto my-16">
               <aside className="flex flex-col">
                 <h1 className="text-2xl font-bold m-5"> Property highlights</h1>
                 <div className="flex-grow-1/2 grid grid-cols-2 m-3 gap-7 gap-x-32 content-end">
@@ -161,7 +166,7 @@ const Details = () => {
                   </p>
                 </div>
               </aside>
-              <aside className="shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.27)] p-7 rounded-xl w-96">
+              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl w-96 mt-5">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold">
                     {item.price?.price.total.amountFormatted}

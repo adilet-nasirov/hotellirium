@@ -33,12 +33,11 @@ const Header = ({ placeholder }) => {
       params: { query: searchInput },
       headers: {
         "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
-    axios
-      .request(options)
-      .then(function (response) {
+    setTimeout(() => {
+      axios.request(options).then(function (response) {
         let display_name = response.data.data[0].display_name;
         let id = response.data.data[0].id;
         router.push({
@@ -51,10 +50,10 @@ const Header = ({ placeholder }) => {
             nofGuests: nofGuests.toString(),
           },
         });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+      }, 200);
+    }).catch(function (error) {
+      console.error(error);
+    });
   };
   return (
     <header className="sticky top-0 z-50  bg-white shadow-md p-3 md:px-10">
