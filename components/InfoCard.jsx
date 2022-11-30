@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
@@ -113,14 +113,19 @@ const InfoCard = ({ item, days }) => {
               )}{" "}
               / night
             </p>
-            <p>
-              $
-              {price
-                ? Number(price.slice(1, price.length)) * days
-                : days *
-                  Number(discountedPrice.slice(1, discountedPrice.length))}{" "}
-              total
-            </p>
+            {days ? (
+              <div>
+                <p>
+                  $
+                  {price
+                    ? parseInt(price?.slice(1))
+                    : days * parseFloat(discountedPrice?.slice(1))}{" "}
+                  total
+                </p>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

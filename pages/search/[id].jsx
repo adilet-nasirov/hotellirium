@@ -166,13 +166,13 @@ const Details = () => {
                   </p>
                 </div>
               </aside>
-              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl w-96 mt-5">
+              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl max-w-xl mt-5">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold">
                     {item.price?.price.total.amountFormatted}
                     <span className="text-md font-light"> night</span>
                   </h1>
-                  <div>
+                  <div className="flex justify-end">
                     <h3
                       className="flex items-center mx-3 cursor-pointer text-xl
                   "
