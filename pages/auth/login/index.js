@@ -17,7 +17,7 @@ import React, { useState } from "react";
 
 import LoginForm from "../../../components/LoginForm";
 
-export default function login() {
+export default function Login() {
   const route = useRouter();
   const [user, loading] = useAuthState(auth);
   const [state, dispatch] = useContext(DataContext);
