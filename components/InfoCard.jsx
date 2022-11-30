@@ -4,7 +4,7 @@ import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
 import { StarIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 function checkIfInLocal(id) {
   let localData = JSON.parse(localStorage.getItem("wishlisted"));
   for (let item of localData) {
@@ -59,7 +59,7 @@ const InfoCard = ({ item, days }) => {
   return (
     <div
       className="flex py-7 px-10 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
-      key={id}
+      key={item.id + 11234}
     >
       <div
         className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0"

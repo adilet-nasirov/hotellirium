@@ -27,9 +27,7 @@ const Details = () => {
   const [nofGuests, setNofGuests] = useState(guests);
   const [loading, setLoading] = useState(false);
   const axios = require("axios");
-  // const filtered = data.filter((el) => el.id === id);
   const [item, setItem] = useState({});
-  // const item = filtered[0];
   const [images, setImages] = useState([]);
   useEffect(() => {
     if (!router.isReady) return;
@@ -46,7 +44,7 @@ const Details = () => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setItem(response.data.data);
         let arr = [];
         for (let image of response.data.data.images) {

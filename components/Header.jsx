@@ -6,15 +6,12 @@ import { DateRangePicker } from "react-date-range";
 import BasicPopover from "./Popover";
 import { SearchIcon, GlobeAltIcon, UsersIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { DataContext } from "../lib/DataContext";
 const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [nofGuests, setNofGuests] = useState(1);
   const router = useRouter();
-  const [state, dispatch] = useContext(DataContext);
   const axios = require("axios");
   const selectionRange = {
     startDate: startDate,

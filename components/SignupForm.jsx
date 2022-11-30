@@ -1,18 +1,10 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
-import {
-  Stack,
-  Box,
-  TextField,
-  IconButton,
-  InputAdornment,
-  Button,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import { motion } from "framer-motion";
 import { auth } from "../utils/firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 /////////////////////////////////////////////////////////////

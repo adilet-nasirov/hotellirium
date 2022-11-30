@@ -51,7 +51,7 @@ function Search() {
             date_in: startDate,
             date_out: endDate,
           });
-          console.log(response.data.data);
+          // console.log(response.data.data);
           // setData(response.data.data);
         })
         .catch(function (error) {
@@ -81,7 +81,9 @@ function Search() {
           </div>
           <div>
             {data
-              ? data.map((item) => <InfoCard item={item} days={days} />)
+              ? data.map((item) => (
+                  <InfoCard item={item} days={days} key={item.id} />
+                ))
               : ""}
           </div>
         </section>
@@ -91,4 +93,4 @@ function Search() {
   );
 }
 
-export default search;
+export default Search;
