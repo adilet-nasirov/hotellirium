@@ -57,8 +57,8 @@ export default function Login() {
   }, [user]);
 
   return (
-    <main className="flex justify-center items-center">
-      <div className="shadow-xl mt-32 p-10 text-gray-700 rounded-lg md:w-1/3 w-96  ">
+    <main className="flex justify-center">
+      <div className="shadow-[0px_6px_34px_7px_#b794f4] mt-10 p-10 text-gray-700 rounded-lg md:w-1/3 w-96  ">
         <h2 className="text-3xl font-medium">Join today</h2>
         <div className="py-4">
           <h3 className="py-4">Sign in with one of the providers</h3>

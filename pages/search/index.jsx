@@ -7,7 +7,7 @@ import axios from "axios";
 import InfoCard from "../../components/InfoCard";
 import { DataContext } from "../../lib/DataContext";
 
-function search() {
+function Search() {
   const [state, dispatch] = useContext(DataContext);
   const { data, user } = state;
   const router = useRouter();
