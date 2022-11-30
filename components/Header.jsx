@@ -37,23 +37,26 @@ const Header = ({ placeholder }) => {
       },
     };
     setTimeout(() => {
-      axios.request(options).then(function (response) {
-        let display_name = response.data.data[0].display_name;
-        let id = response.data.data[0].id;
-        router.push({
-          pathname: "/search",
-          query: {
-            location: display_name,
-            id: id,
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString(),
-            nofGuests: nofGuests.toString(),
-          },
+      axios
+        .request(options)
+        .then(function (response) {
+          let display_name = response.data.data[0].display_name;
+          let id = response.data.data[0].id;
+          router.push({
+            pathname: "/search",
+            query: {
+              location: display_name,
+              id: id,
+              startDate: startDate.toISOString(),
+              endDate: endDate.toISOString(),
+              nofGuests: nofGuests.toString(),
+            },
+          });
+        })
+        .catch(function (error) {
+          console.error(error);
         });
-      }, 200);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    }, 100);
   };
   return (
     <header className="sticky top-0 z-50  bg-white shadow-md p-3 md:px-10">
