@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import moment from "moment/moment";
@@ -9,7 +9,7 @@ import { DataContext } from "../../lib/DataContext";
 
 function Search() {
   const [state, dispatch] = useContext(DataContext);
-  const { data, user } = state;
+  const [stateData, setData] = useState([]);
   const router = useRouter();
   const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
@@ -51,14 +51,14 @@ function Search() {
             date_in: startDate,
             date_out: endDate,
           });
-          // console.log(response.data.data);
+          console.log(response.data.data);
           setData(response.data.data);
         })
         .catch(function (error) {
           console.error(error);
           dispatch({ type: "api_call_error" });
         });
-    }, 1000);
+    }, 500);
   }, [router.isReady]);
 
   return (
@@ -80,8 +80,8 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {data
-              ? data.map((item) => (
+            {stateData
+              ? stateData.map((item) => (
                   <InfoCard item={item} days={days} key={item.id} />
                 ))
               : ""}
