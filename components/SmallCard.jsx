@@ -7,7 +7,6 @@ const SmallCard = ({ img, location, distance }) => {
   const startDate = new Date();
   const endDate = new Date();
   const handleClick = () => {
-    console.log(location);
     const options = {
       method: "GET",
       url: "https://airbnb19.p.rapidapi.com/api/v1/searchDestination",
@@ -39,6 +38,7 @@ const SmallCard = ({ img, location, distance }) => {
   };
   return (
     <div
+      key={location}
       onClick={handleClick}
       className="flex items-center m-2 mt-5 space-x-4 rounded-xl cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out"
     >

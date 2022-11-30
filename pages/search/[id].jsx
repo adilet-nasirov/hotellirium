@@ -115,7 +115,7 @@ const Details = () => {
               </div>
             </div>
             <div className="mx-auto my-12">
-              <ImageGallery lazyLoad={true} autoPlay={true} items={images} />
+              <ImageGallery showBullets={true} autoPlay={true} items={images} />
             </div>
             <div className="flex justify-between mx-auto">
               <aside className="flex flex-col">
@@ -166,7 +166,7 @@ const Details = () => {
               <aside className="shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.27)] p-7 rounded-xl w-96">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold">
-                    {item.price?.price.total.amountForm}
+                    {item.price?.price.total.amountFormatted}
                     <span className="text-md font-light"> night</span>
                   </h1>
                   <div>

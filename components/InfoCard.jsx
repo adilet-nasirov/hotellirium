@@ -64,6 +64,7 @@ const InfoCard = ({ item, days }) => {
       <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
         <Image
           src={images[0]}
+          alt={title}
           layout="fill"
           objectFit="cover"
           className="rounded-2xl"
