@@ -61,7 +61,10 @@ const InfoCard = ({ item, days }) => {
       className="flex py-7 px-10 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
       key={id}
     >
-      <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
+      <div
+        className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0"
+        key={images[0]}
+      >
         <Image
           src={images[0]}
           alt={title}
@@ -70,7 +73,7 @@ const InfoCard = ({ item, days }) => {
           className="rounded-2xl"
         />
       </div>
-      <div className="flex flex-col flex-grow pl-5">
+      <div className="flex flex-col flex-grow pl-5" key={bedrooms}>
         <div className="flex justify-between">
           <p>{title}</p>
           {isWishlisted ? (
