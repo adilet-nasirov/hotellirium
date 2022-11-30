@@ -56,7 +56,7 @@ const Header = ({ placeholder }) => {
         .catch(function (error) {
           console.error(error);
         });
-    }, 100);
+    }, 500);
   };
   return (
     <header className="sticky top-0 z-50  bg-white shadow-md p-3 md:px-10">
