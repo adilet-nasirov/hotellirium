@@ -13,7 +13,7 @@ const SmallCard = ({ img, location, distance }) => {
       params: { query: location },
       headers: {
         "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": "airbnb19.p.rapidapi.com",
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
     axios

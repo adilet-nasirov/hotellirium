@@ -58,7 +58,7 @@ function Search() {
           console.error(error);
           dispatch({ type: "api_call_error" });
         });
-    }, 500);
+    }, 700);
   }, [router.isReady]);
 
   return (
