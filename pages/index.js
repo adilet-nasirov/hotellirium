@@ -89,6 +89,7 @@ export default function Home() {
           buttonText={"Get Inspired"}
         />
       </main>
+
       <footer>
         <Footer />
       </footer>

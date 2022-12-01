@@ -115,9 +115,11 @@ const Details = () => {
             <div className="mx-auto my-12 h-screen">
               <ImageGallery
                 lazyLoad={true}
-                showBullets={true}
+                showBullets={false}
                 autoPlay={true}
                 items={images}
+                showThumbnails={false}
+                slideDuration={700}
               />
             </div>
             <div className="flex justify-between mx-auto my-16">
