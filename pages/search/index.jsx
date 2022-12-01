@@ -80,7 +80,7 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {data !== null ? (
+            {data.length ? (
               data.map((item) => (
                 <InfoCard item={item} days={days} key={item.id} />
               ))
