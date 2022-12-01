@@ -29,7 +29,7 @@ function Search() {
       params: {
         id: id,
         display_name: location,
-        totalRecords: "15",
+        totalRecords: "35",
         currency: "USD",
         adults: nofGuests,
       },
@@ -59,7 +59,7 @@ function Search() {
           dispatch({ type: "api_call_error" });
         });
     }, 700);
-  }, [router.isReady]);
+  }, [router.isReady, location]);
 
   return (
     <div className="h-screen ">

@@ -6,11 +6,13 @@ import { DateRangePicker } from "react-date-range";
 import BasicPopover from "./Popover";
 import { SearchIcon, GlobeAltIcon, UsersIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { Alert, AlertTitle } from "@mui/material";
 const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [nofGuests, setNofGuests] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const axios = require("axios");
   const selectionRange = {
@@ -52,11 +54,15 @@ const Header = ({ placeholder }) => {
               nofGuests: nofGuests.toString(),
             },
           });
+          resetInput();
         })
         .catch(function (error) {
-          console.error(error);
+          setErrorMessage(error.message);
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 3000);
         });
-    }, 500);
+    }, 100);
   };
   return (
     <header className="sticky top-0 z-50  bg-white shadow-md p-3 md:px-10">
@@ -97,40 +103,57 @@ const Header = ({ placeholder }) => {
         </div> */}
           <BasicPopover />
         </div>
-        {searchInput && (
-          <div className="flex flex-col col-span-3 mx-auto">
-            <DateRangePicker
-              ranges={[selectionRange]}
-              minDate={new Date()}
-              rangeColors={["#FD5B61"]}
-              onChange={handleSelect}
-            />
-            <div className="flex items-center border-b mb-4">
-              <h2 className="text-2xl flex-grow font-semibold">
-                Number of guests
-              </h2>
-              <UsersIcon className="h-8" />
-              <input
-                value={nofGuests}
-                onChange={(e) => setNofGuests(e.target.value)}
-                type="number"
-                min={1}
-                className="w-12 pl-2 text-lg outline-none  text-rose-500"
+        {/* error message */}
+        <div>
+          {errorMessage && (
+            <Alert
+              variant="filled"
+              severity="warning"
+              className="absolute object-center z-10 top-2 right-96 mx-12"
+            >
+              <AlertTitle>Input doesn't match to any location</AlertTitle>
+            </Alert>
+          )}
+        </div>
+        <section>
+          {searchInput && (
+            <div className="flex flex-col col-span-3 mx-auto">
+              <DateRangePicker
+                ranges={[selectionRange]}
+                minDate={new Date()}
+                rangeColors={["#FD5B61"]}
+                onChange={handleSelect}
               />
+              <div className="flex items-center border-b mb-4">
+                <h2 className="text-2xl flex-grow font-semibold">
+                  Number of guests
+                </h2>
+                <UsersIcon className="h-8" />
+                <input
+                  value={nofGuests}
+                  onChange={(e) => setNofGuests(e.target.value)}
+                  type="number"
+                  min={1}
+                  className="w-12 pl-2 text-lg outline-none  text-rose-500"
+                />
+              </div>
+              <div className="flex">
+                <button
+                  onClick={resetInput}
+                  className="flex-grow text-gray-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSearch}
+                  className="flex-grow text-rose-500"
+                >
+                  Search
+                </button>
+              </div>
             </div>
-            <div className="flex">
-              <button onClick={resetInput} className="flex-grow text-gray-500">
-                Cancel
-              </button>
-              <button
-                onClick={handleSearch}
-                className="flex-grow text-rose-500"
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        )}
+          )}
+        </section>
       </div>
     </header>
   );
