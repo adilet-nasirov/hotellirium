@@ -58,7 +58,7 @@ export default function Home() {
       <Header />
       <Banner />
 
-      <main className="max-w-7xl mx-auto px-8">
+      <main className="max-w-7xl mx-auto">
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
           {/* Pull some data from a server */}
@@ -73,21 +73,23 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section>
+        <section className="w-full">
           <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
-          <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3">
+          <div className="flex space-x-4 overflow-scroll scrollbar-hide py-3 -ml-3">
             {cardsData.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
           </div>
         </section>
         {/* Large card section */}
-        <LargeCard
-          img={"https://links.papareact.com/4cj"}
-          title={"The Greatest Outdoors"}
-          description={"Wishlists curated by Ordo"}
-          buttonText={"Get Inspired"}
-        />
+        <section className="w-full">
+          <LargeCard
+            img={"https://links.papareact.com/4cj"}
+            title={"The Greatest Outdoors"}
+            description={"Wishlists curated by Ordo"}
+            buttonText={"Get Inspired"}
+          />
+        </section>
       </main>
 
       <footer>

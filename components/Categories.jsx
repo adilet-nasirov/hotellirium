@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import getCategories from "../lib/data-files/categ";
 import Image from "next/image";
+import { useRouter } from "next/router";
 const Categories = () => {
+  const router = useRouter();
   const [categs, setCategs] = useState([]);
   useEffect(() => {
     const data = getCategories();
     setCategs(data);
   }, []);
+  const handleClick = (id) => {
+    console.log(id);
+  };
   return (
     <div className="max-w-7xl mx-auto h-12 flex flex-nowrap mb-5 space-x-7 text-gray-800 whitespace-nowrap overflow-scroll scrollbar-hide box-border	">
       {categs &&
@@ -14,6 +19,7 @@ const Categories = () => {
           return (
             <div
               key={category.id}
+              onClick={() => handleClick(category.id)}
               className="cursor-pointer hover:scale-105 transform transition duration-300 ease-out flex flex-col items-center hover:text-black hover:border-b-4 border-rose-500 box-border"
             >
               <div className="relative h-6 w-6 ">

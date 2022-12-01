@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 const LargeCard = ({ img, title, description, buttonText }) => {
   return (
-    <section className="relative py-16 cursor-pointer" key={img}>
-      <div className="relative h-96 min-w-[300px]">
+    <section className="w-full relative py-16 cursor-pointer" key={img}>
+      <div className="w-full relative h-96 min-w-[300px]">
         <Image
           src={img}
           layout="fill"
