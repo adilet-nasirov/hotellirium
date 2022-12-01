@@ -115,7 +115,7 @@ const InfoCard = ({ item, days }) => {
             </p>
             {days ? (
               <div>
-                <p>
+                <p className="text-end">
                   $
                   {price
                     ? parseInt(price?.slice(1))
