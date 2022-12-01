@@ -44,7 +44,7 @@ const Details = () => {
     axios
       .request(options)
       .then(function (response) {
-        // console.log(response.data);
+        console.log(response.data);
         setItem(response.data.data);
         let arr = [];
         for (let image of response.data.data.images) {

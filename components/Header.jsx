@@ -77,6 +77,7 @@ const Header = ({ placeholder }) => {
             layout="fill"
             objectFit="contain"
             objectPosition="left"
+            key={"kj12341213123145784319asf"}
           />
         </div>
         {/* Middle one */}
@@ -111,7 +112,7 @@ const Header = ({ placeholder }) => {
               severity="warning"
               className="absolute object-center z-10 top-2 right-96 mx-12"
             >
-              <AlertTitle>Input doesn't match to any location</AlertTitle>
+              <AlertTitle>Input doesn&apos;t match to any location</AlertTitle>
             </Alert>
           )}
         </div>
