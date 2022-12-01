@@ -65,7 +65,7 @@ function Search() {
     <div className="h-screen ">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
       <main className="max-w-7xl mx-auto">
-        <section className=" pt-12 px-6">
+        <section className=" pt-1 px-6">
           <p className="text-xs mt-3">
             300+ stays {range}for {nofGuests} guests
           </p>
@@ -80,13 +80,10 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {data?.length ? (
-              data?.map((item) => (
-                <InfoCard item={item} days={days} key={item.id} />
-              ))
-            ) : (
-              <h1>Ech nerse jok bul jakta</h1>
-            )}
+            {data?.length &&
+              data?.map((item) => {
+                return <InfoCard item={item} days={days} key={item.id} />;
+              })}
           </div>
         </section>
       </main>

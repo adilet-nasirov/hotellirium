@@ -112,7 +112,7 @@ const Details = () => {
                 </p>
               </div>
             </div>
-            <div className="mx-auto my-12 h-screen">
+            <div className="mx-auto my-12 md:w-full">
               <ImageGallery
                 lazyLoad={true}
                 showBullets={false}
@@ -122,10 +122,10 @@ const Details = () => {
                 slideDuration={700}
               />
             </div>
-            <div className="flex justify-between mx-auto my-16">
+            <div className="flex flex-col justify-between mx-auto my-16 md:flex-row md:justify-between">
               <aside className="flex flex-col">
                 <h1 className="text-2xl font-bold m-5"> Property highlights</h1>
-                <div className="flex-grow-1/2 grid grid-cols-2 m-3 gap-7 gap-x-32 content-end">
+                <div className="flex-grow-1/2 grid grid-cols-2 m-3 gap-5 gap-x-5 content-end md:gap-x-32 md:gap-9">
                   <p className="flex items-center text-xl ">
                     <FaWifi className="mx-3" />
                     Free WiFi
@@ -168,7 +168,7 @@ const Details = () => {
                   </p>
                 </div>
               </aside>
-              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl max-w-xl mt-5">
+              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl w-96 mt-5 mx-auto md:mx-0">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold">
                     {item.price?.price.total.amountFormatted}
