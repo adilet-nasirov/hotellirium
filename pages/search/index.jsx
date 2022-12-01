@@ -15,7 +15,7 @@ function Search() {
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
   const formattedEndDate = moment(endDate).utc().format("DD MMMM YY");
   const range = `- ${formattedStartDate} - ${formattedEndDate} - `;
-
+  console.log(data);
   let days = Math.floor(
     (Date.parse(endDate) - Date.parse(startDate)) / 86400000
   );
@@ -51,7 +51,7 @@ function Search() {
             date_in: startDate,
             date_out: endDate,
           });
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setData(response.data.data);
         })
         .catch(function (error) {
@@ -80,12 +80,12 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {data.length ? (
-              data.map((item) => (
+            {data?.length ? (
+              data?.map((item) => (
                 <InfoCard item={item} days={days} key={item.id} />
               ))
             ) : (
-              <></>
+              <h1>Ech nerse jok bul jakta</h1>
             )}
           </div>
         </section>

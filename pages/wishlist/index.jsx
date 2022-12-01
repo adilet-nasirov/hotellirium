@@ -14,7 +14,7 @@ const Wishlist = () => {
     <div>
       <Header />
       <div className="max-w-7xl mx-auto">
-        {data.length ? (
+        {data?.length ? (
           data.map((el) => <InfoCard item={el} key={el.id + 9090123} />)
         ) : (
           <div className="h-96 my-40">
