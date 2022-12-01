@@ -39,31 +39,29 @@ const Header = ({ placeholder }) => {
         "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
-    setTimeout(() => {
-      axios
-        .request(options)
-        .then(function (response) {
-          let display_name = response.data.data[0].display_name;
-          let id = response.data.data[0].id;
-          router.push({
-            pathname: "/search",
-            query: {
-              location: display_name,
-              id: id,
-              startDate: startDate.toISOString(),
-              endDate: endDate.toISOString(),
-              nofGuests: nofGuests.toString(),
-            },
-          });
-          resetInput();
-        })
-        .catch(function (error) {
-          setErrorMessage(error.message);
-          setTimeout(() => {
-            setErrorMessage("");
-          }, 3000);
+    axios
+      .request(options)
+      .then(function (response) {
+        let display_name = response.data.data[0].display_name;
+        let id = response.data.data[0].id;
+        router.push({
+          pathname: "/search",
+          query: {
+            location: display_name,
+            id: id,
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString(),
+            nofGuests: nofGuests.toString(),
+          },
         });
-    }, 100);
+        resetInput();
+      })
+      .catch(function (error) {
+        setErrorMessage(error.message);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 3000);
+      });
   };
   return (
     <div className="box-border z-20">

@@ -80,10 +80,14 @@ function Search() {
             <p className="button">More filters...</p>
           </div>
           <div>
-            {data?.length &&
+            {data ? (
+              data &&
               data?.map((item) => {
                 return <InfoCard item={item} days={days} key={item.id} />;
-              })}
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </section>
       </main>

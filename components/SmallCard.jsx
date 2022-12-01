@@ -1,40 +1,24 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import city_ids from "../lib/data-files/city_ids";
 const SmallCard = ({ img, location, distance }) => {
   const axios = require("axios");
   const router = useRouter();
   const startDate = new Date();
-  const endDate = new Date();
+  const endDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
   const handleClick = () => {
-    const options = {
-      method: "GET",
-      url: "https://airbnb19.p.rapidapi.com/api/v1/searchDestination",
-      params: { query: location },
-      headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
+    const { id, location_name } = city_ids[location][0];
+    router.push({
+      pathname: "/search",
+      query: {
+        location: location_name,
+        id: id,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        nofGuests: "1",
       },
-    };
-    axios
-      .request(options)
-      .then(function (response) {
-        let display_name = response.data.data[0].display_name;
-        let id = response.data.data[0].id;
-        router.push({
-          pathname: "/search",
-          query: {
-            location: display_name,
-            id: id,
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString(),
-            nofGuests: "1",
-          },
-        });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    });
   };
   return (
     <div
@@ -53,5 +37,5 @@ const SmallCard = ({ img, location, distance }) => {
       </div>
     </div>
   );
-};
+};;;;
 export default SmallCard;
