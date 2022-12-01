@@ -42,8 +42,8 @@ const Page = () => {
   return (
     <div>
       <Header />
-      <main>
-        <div>
+      <main className={!data && "h-screen "}>
+        <div className="max-w-7xl mx-auto">
           {data ? (
             data &&
             data?.map((item) => {

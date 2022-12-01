@@ -62,7 +62,7 @@ function Search() {
   }, [router.isReady, location]);
 
   return (
-    <div className="h-screen ">
+    <div className="h-screen">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
       <main className="max-w-7xl mx-auto">
         <section className=" pt-1 px-6">
@@ -79,7 +79,7 @@ function Search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
           </div>
-          <div>
+          <div className={!data && "h-screen"}>
             {data ? (
               data &&
               data?.map((item) => {
