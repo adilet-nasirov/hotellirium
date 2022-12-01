@@ -42,7 +42,7 @@ const Page = () => {
   return (
     <div>
       <Header />
-      <main className={!data && "h-screen "}>
+      <main className={!data ? "h-screen " : ""}>
         <div className="max-w-7xl mx-auto">
           {data ? (
             data &&

@@ -5,13 +5,8 @@ import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
 import { StarIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useRouter } from "next/router";
-function checkIfInLocal(id) {
-  let localData = JSON.parse(localStorage.getItem("wishlisted"));
-  for (let item of localData) {
-    if (item.id === id) return true;
-  }
-  return false;
-}
+
+
 const InfoCard = ({ item, days }) => {
   const router = useRouter();
   const {
@@ -29,8 +24,24 @@ const InfoCard = ({ item, days }) => {
     avgRating,
     listingBedLabel,
   } = item;
-  const localData = JSON.parse(localStorage.getItem("wishlisted"));
-  const [data, setData] = useState(localData);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("wishlisted"));
+    setData(localData);
+  }, []);
+  function checkIfInLocal(id) {
+    let localData = [];
+    if (typeof window !== "undefined") {
+      localData = JSON.parse(localStorage.getItem("wishlisted"));
+      // 👉️ can use localStorage here
+    }
+    if (!localData || localData.length === 0) return false;
+    for (let item of localData) {
+      if (item.id === id) return true;
+    }
+    return false;
+  }
   function addToLiked(itemData) {
     const dataFromStorage = JSON.parse(localStorage.getItem("wishlisted"));
     const { id } = itemData;

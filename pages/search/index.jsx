@@ -79,7 +79,7 @@ function Search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
           </div>
-          <div className={!data && "h-screen"}>
+          <div className={!data ? "h-screen" : ""}>
             {data ? (
               data &&
               data?.map((item) => {
