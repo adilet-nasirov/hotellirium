@@ -142,10 +142,10 @@ const Details = () => {
                     {item.valueRating}
                   </h3>
                 )}
-                <p className="underline mx-4 cursor-pointer text-xl">
+                <p className="underline mx-4 cursor-pointer text-xl hover:text-rose-500 hover:scale-105">
                   {item.reviewsCount} reviews
                 </p>
-                <p className="underline mx-5 cursor-pointer text-xl">
+                <p className="underline mx-5 cursor-pointer text-xl hover:text-rose-500 hover:scale-105">
                   {item.location}
                 </p>
               </div>
@@ -195,7 +195,7 @@ const Details = () => {
             <div className="flex flex-col justify-between mx-auto my-16 md:flex-row md:justify-between">
               <aside className="flex flex-col">
                 <h1 className="text-2xl font-bold m-5"> Property highlights</h1>
-                <div className="flex-grow-1/2 grid grid-cols-2 m-3 gap-5 gap-x-5 content-end md:gap-x-32 md:gap-9">
+                <div className="flex-grow-1/2 grid grid-cols-1 sm:grid-cols-2 m-3 gap-5 gap-x-5 content-end sm:gap-x-32 md:gap-x-32 md:gap-9">
                   <p className="flex items-center text-xl ">
                     <FaWifi className="mx-3" />
                     Free WiFi
@@ -238,25 +238,25 @@ const Details = () => {
                   </p>
                 </div>
               </aside>
-              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl w-96 mt-5 mx-auto md:mx-0">
+              <aside className="shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] p-7 rounded-xl min-w-96 mt-5 mx-auto md:mx-0">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-2xl font-bold">
+                  <h1 className="text-xl font-bold hover:text-rose-500 cursor-pointer">
                     {item.price?.price.total.amountFormatted}
                     <span className="text-md font-light"> night</span>
                   </h1>
                   <div className="flex justify-end">
                     <h3
-                      className="flex items-center mx-3 cursor-pointer text-xl
+                      className="flex items-center mx-3 cursor-pointer text-xl hover:text-rose-500
                   "
                     >
                       {item.valueRating && (
                         <FaStar size={20} className="mx-1  text-rose-500" />
                       )}
                       {item.valueRating}
-                      <span className="underline mx-4 cursor-pointer text-xl">
-                        {item.reviewsCount} reviews
-                      </span>
                     </h3>
+                    <p className="flex flex-row underline mx-4 cursor-pointer text-xl hover:text-rose-500">
+                      {item.reviewsCount} reviews
+                    </p>
                   </div>
                 </div>
                 <div className="mt-5">

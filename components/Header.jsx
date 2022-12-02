@@ -66,7 +66,7 @@ const Header = ({ placeholder }) => {
   };
   return (
     <div className="sticky top-0 box-border z-20 bg-white border-b shadow-sm">
-      <header className="z-50  bg-white shadow-md p-3 md:px-10">
+      <header className="z-50  bg-white shadow-md p-3 md:px-10 ">
         <div className="grid grid-cols-3 max-w-7xl mx-auto">
           {/* Left div */}
           <div
@@ -106,7 +106,7 @@ const Header = ({ placeholder }) => {
             <BasicPopover />
           </div>
           {/* error message */}
-          <div>
+          <>
             {errorMessage && (
               <Alert
                 variant="filled"
@@ -118,47 +118,50 @@ const Header = ({ placeholder }) => {
                 </AlertTitle>
               </Alert>
             )}
-          </div>
-          <section>
-            {searchInput && (
-              <div className="flex flex-col col-span-3 mx-auto">
+          </>
+        </div>
+        <section className="flex justify-center max-w-96">
+          {searchInput && (
+            <div className="flex flex-col col-span-3 mx-auto">
+              <div className="hidden md:inline">
                 <DateRangePicker
                   ranges={[selectionRange]}
                   minDate={new Date()}
                   rangeColors={["#FD5B61"]}
                   onChange={handleSelect}
+                  className="hidden"
                 />
-                <div className="flex items-center border-b mb-4">
-                  <h2 className="text-2xl flex-grow font-semibold">
-                    Number of guests
-                  </h2>
-                  <UsersIcon className="h-8" />
-                  <input
-                    value={nofGuests}
-                    onChange={(e) => setNofGuests(e.target.value)}
-                    type="number"
-                    min={1}
-                    className="w-12 pl-2 text-lg outline-none  text-rose-500"
-                  />
-                </div>
-                <div className="flex">
-                  <button
-                    onClick={resetInput}
-                    className="flex-grow text-gray-500"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSearch}
-                    className="flex-grow text-rose-500"
-                  >
-                    Search
-                  </button>
-                </div>
               </div>
-            )}
-          </section>
-        </div>
+              <div className="flex items-center border-b mb-4">
+                <h2 className="text-lg flex-grow font-light md:font-semibold md:text-xl">
+                  Number of guests
+                </h2>
+                <UsersIcon className="h-8" />
+                <input
+                  value={nofGuests}
+                  onChange={(e) => setNofGuests(e.target.value)}
+                  type="number"
+                  min={1}
+                  className="w-12 pl-2 text-lg outline-none  text-rose-500"
+                />
+              </div>
+              <div className="flex">
+                <button
+                  onClick={resetInput}
+                  className="flex-grow text-gray-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSearch}
+                  className="flex-grow text-rose-500"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
       </header>
       <div className="w-screen pt-5 box-border">
         <Categories />
