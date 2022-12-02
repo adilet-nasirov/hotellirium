@@ -8,7 +8,9 @@ import Footer from "../../../components/Footer";
 import { FaConciergeBell, FaParking, FaStar, FaWifi } from "react-icons/fa";
 import { FiShare } from "react-icons/fi";
 import { GiDesk } from "react-icons/gi";
-import { IoMdHeartEmpty, IoMdSnow } from "react-icons/io";
+import { IoMdSnow } from "react-icons/io";
+import { Triangle } from "react-loader-spinner";
+
 import { CgGym } from "react-icons/cg";
 import { UsersIcon } from "@heroicons/react/solid";
 import ImageGallery from "react-image-gallery";
@@ -28,10 +30,12 @@ const Details = () => {
   const { days, guests } = state;
   const [nofGuests, setNofGuests] = useState(guests);
   const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(true);
   const axios = require("axios");
   const [item, setItem] = useState({});
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [images, setImages] = useState([]);
+
   useEffect(() => {
     if (!router.isReady) return;
     const options = {
@@ -43,7 +47,6 @@ const Details = () => {
         "X-RapidAPI-Host": process.env.NEXT_PUBLIC_HOST,
       },
     };
-
     axios
       .request(options)
       .then(function (response) {
@@ -54,6 +57,9 @@ const Details = () => {
           arr.push({ original: image, thumbnail: image });
         }
         setImages(arr);
+        setTimeout(() => {
+          setLoader(false);
+        }, 200);
       })
       .catch(function (error) {
         console.error(error);
@@ -100,7 +106,6 @@ const Details = () => {
       if (isAlreadyInWishlist) {
         if (dataFromStorage.length === 1) {
           localStorage.removeItem("wishlisted");
-
           return;
         }
         let newdataFromStorage = dataFromStorage.filter((el) => el.id !== id);
@@ -163,16 +168,33 @@ const Details = () => {
                 </p>
               </div>
             </div>
-            <div className="mx-auto my-12 md:w-full max-h-full box-border lg:h-screen">
-              <ImageGallery
-                lazyLoad={true}
-                showBullets={false}
-                autoPlay={true}
-                items={images}
-                showThumbnails={false}
-                slideDuration={700}
-              />
+            <div>
+              {loader ? (
+                <div className="h-96 flex justify-center items-center">
+                  <Triangle
+                    height="120"
+                    width="120"
+                    color="#FF385C"
+                    ariaLabel="triangle-loading"
+                    wrapperStyle={{}}
+                    wrapperClassName=""
+                    visible={true}
+                  />
+                </div>
+              ) : (
+                <div className="mx-auto my-12 md:w-full max-h-full box-border lg:h-screen">
+                  <ImageGallery
+                    lazyLoad={true}
+                    showBullets={false}
+                    autoPlay={true}
+                    items={images}
+                    showThumbnails={false}
+                    slideDuration={700}
+                  />
+                </div>
+              )}
             </div>
+
             <div className="flex flex-col justify-between mx-auto my-16 md:flex-row md:justify-between">
               <aside className="flex flex-col">
                 <h1 className="text-2xl font-bold m-5"> Property highlights</h1>

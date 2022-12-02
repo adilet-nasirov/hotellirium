@@ -16,7 +16,7 @@ const Categories = () => {
             <div
               key={category.id}
               onClick={() => handleClick(category.id)}
-              className="cursor-pointer hover:scale-105 transform transition duration-300 ease-out flex flex-col items-center hover:text-black hover:border-b-4 border-rose-500 box-border"
+              className="cursor-pointer hover:scale-105 transform transition duration-200 ease-out flex flex-col items-center hover:text-black hover:border-b-4 border-rose-500 box-border"
             >
               <div className="relative h-6 w-6 ">
                 <Image src={category.image} layout="fill" />

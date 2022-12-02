@@ -25,7 +25,7 @@ const InfoCard = ({ item, days }) => {
     listingBedLabel,
   } = item;
   const [data, setData] = useState([]);
-
+  
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("wishlisted"));
     setData(localData);
@@ -132,8 +132,9 @@ const InfoCard = ({ item, days }) => {
                 <p className="text-end">
                   $
                   {price
-                    ? parseInt(price?.slice(1))
-                    : days * parseFloat(discountedPrice?.slice(1))}{" "}
+                    ? Number(price.replace(/[^0-9.-]+/g, ""))
+                    : days *
+                      Number(discountedPrice.replace(/[^0-9.-]+/g, ""))}{" "}
                   total
                 </p>
               </div>

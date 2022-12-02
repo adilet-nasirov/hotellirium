@@ -62,7 +62,7 @@ function Search() {
           console.error(error);
           dispatch({ type: "api_call_error" });
         });
-    }, 5000);
+    }, 900);
   }, [router.isReady, location]);
 
   return (

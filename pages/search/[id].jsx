@@ -8,8 +8,10 @@ import Footer from "../../components/Footer";
 import { FaConciergeBell, FaParking, FaStar, FaWifi } from "react-icons/fa";
 import { FiShare } from "react-icons/fi";
 import { GiDesk } from "react-icons/gi";
-import { IoMdHeartEmpty, IoMdSnow } from "react-icons/io";
+import { IoMdSnow } from "react-icons/io";
 import { CgGym } from "react-icons/cg";
+import { Dna } from "react-loader-spinner";
+
 import { UsersIcon } from "@heroicons/react/solid";
 import ImageGallery from "react-image-gallery";
 import { loadStripe } from "@stripe/stripe-js";
@@ -28,6 +30,7 @@ const Details = () => {
   const { days, guests } = state;
   const [nofGuests, setNofGuests] = useState(guests);
   const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(true);
   const axios = require("axios");
   const [item, setItem] = useState({});
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -54,6 +57,9 @@ const Details = () => {
           arr.push({ original: image, thumbnail: image });
         }
         setImages(arr);
+        setTimeout(() => {
+          setLoader(false);
+        }, 100);
       })
       .catch(function (error) {
         console.error(error);
@@ -164,14 +170,27 @@ const Details = () => {
               </div>
             </div>
             <div className="mx-auto my-12 md:w-full max-h-full box-border lg:h-screen">
-              <ImageGallery
-                lazyLoad={true}
-                showBullets={false}
-                autoPlay={true}
-                items={images}
-                showThumbnails={false}
-                slideDuration={700}
-              />
+              {loader ? (
+                <div className="h-96 flex justify-center items-center">
+                  <Dna
+                    visible={true}
+                    height="150"
+                    width="150"
+                    ariaLabel="dna-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="dna-wrapper"
+                  />
+                </div>
+              ) : (
+                <ImageGallery
+                  lazyLoad={true}
+                  showBullets={false}
+                  autoPlay={true}
+                  items={images}
+                  showThumbnails={false}
+                  slideDuration={700}
+                />
+              )}
             </div>
             <div className="flex flex-col justify-between mx-auto my-16 md:flex-row md:justify-between">
               <aside className="flex flex-col">

@@ -4,11 +4,15 @@ import Header from "../../components/Header";
 import InfoCard from "../../components/InfoCard";
 import { DataContext } from "../../lib/DataContext";
 import Footer from "../../components/Footer";
+import { InfinitySpin } from "react-loader-spinner";
+
 const Page = () => {
   const router = useRouter();
   const { id } = router.query;
   console.log(id);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [state, dispatch] = useContext(DataContext);
   const { days, guests } = state;
   useEffect(() => {
@@ -38,20 +42,27 @@ const Page = () => {
       .catch(function (error) {
         console.error(error);
       });
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, [router.isReady, id]);
   return (
     <div>
       <Header />
-      <main className={!data ? "h-screen " : ""}>
+      <main>
         <div className="max-w-7xl mx-auto">
-          {data ? (
-            data &&
-            data?.map((item) => {
-              return <InfoCard item={item} days={days} key={item.id} />;
-            })
-          ) : (
-            <></>
-          )}
+          <div>
+            {loading ? (
+              <div className="h-screen flex justify-center items-center">
+                <InfinitySpin width="300" color="#FF385C" />
+              </div>
+            ) : (
+              data &&
+              data?.map((item) => {
+                return <InfoCard item={item} days={days} key={item.id} />;
+              })
+            )}
+          </div>
         </div>
       </main>
       <Footer />
