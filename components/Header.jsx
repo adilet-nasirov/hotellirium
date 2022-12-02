@@ -7,6 +7,7 @@ import BasicPopover from "./Popover";
 import { SearchIcon, GlobeAltIcon, UsersIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import Categories from "./Categories";
+import logo from "../images/logo.png";
 import { Alert, AlertTitle } from "@mui/material";
 const Header = ({ placeholder }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -73,7 +74,7 @@ const Header = ({ placeholder }) => {
             className="relative flex items-center h-10 cursor-pointer my-auto"
           >
             <Image
-              src="https://links.papareact.com/qd3"
+              src={logo}
               layout="fill"
               objectFit="contain"
               objectPosition="left"

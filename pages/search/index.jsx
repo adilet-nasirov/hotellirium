@@ -6,11 +6,14 @@ import moment from "moment/moment";
 import axios from "axios";
 import InfoCard from "../../components/InfoCard";
 import { DataContext } from "../../lib/DataContext";
+import { MutatingDots } from "react-loader-spinner";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function Search() {
   const [state, dispatch] = useContext(DataContext);
   const [data, setData] = useState([]);
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const { endDate, startDate, location, id, nofGuests } = router.query;
   const formattedStartDate = moment(startDate).utc().format("DD MMMM YY");
   const formattedEndDate = moment(endDate).utc().format("DD MMMM YY");
@@ -53,19 +56,20 @@ function Search() {
           });
           // console.log(response.data.data);
           setData(response.data.data);
+          setLoading(false);
         })
         .catch(function (error) {
           console.error(error);
           dispatch({ type: "api_call_error" });
         });
-    }, 700);
+    }, 5000);
   }, [router.isReady, location]);
 
   return (
-    <div className="h-screen">
+    <div className="">
       <Header placeholder={`${location} | ${range} | ${nofGuests}`} />
       <main className="max-w-7xl mx-auto">
-        <section className=" pt-1 px-6">
+        <section className="pt-1 px-6">
           <p className="text-xs mt-3">
             300+ stays {range}for {nofGuests} guests
           </p>
@@ -79,14 +83,27 @@ function Search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters...</p>
           </div>
-          <div className={!data ? "h-screen" : ""}>
-            {data ? (
-              data &&
-              data?.map((item) => {
+          <div className={loading ? `h-screen` : ``}>
+            {loading ? (
+              <div className="h-96 flex justify-center items-center">
+                <MutatingDots
+                  height="135"
+                  width="135"
+                  color="#FF385C"
+                  secondaryColor="#FF385C"
+                  radius="12.5"
+                  ariaLabel="mutating-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                />
+              </div>
+            ) : data ? (
+              data.map((item) => {
                 return <InfoCard item={item} days={days} key={item.id} />;
               })
             ) : (
-              <></>
+              <div></div>
             )}
           </div>
         </section>
