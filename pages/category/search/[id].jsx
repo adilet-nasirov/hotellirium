@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { DataContext } from "../../lib/DataContext";
+import { DataContext } from "../../../lib/DataContext";
 import { HeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as LikedIcon } from "@heroicons/react/solid";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 import { FaConciergeBell, FaParking, FaStar, FaWifi } from "react-icons/fa";
 import { FiShare } from "react-icons/fi";
 import { GiDesk } from "react-icons/gi";
@@ -19,7 +19,7 @@ import {
   MdOutlineSmokeFree,
   MdPets,
 } from "react-icons/md";
-import ResponsiveDatePickers from "../../components/ResponsiveDatePickers";
+import ResponsiveDatePickers from "../../../components/ResponsiveDatePickers";
 
 const Details = () => {
   const router = useRouter();
@@ -293,6 +293,6 @@ const Details = () => {
       <Footer />
     </div>
   );
-};;
+};
 
 export default Details;

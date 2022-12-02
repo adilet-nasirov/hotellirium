@@ -69,7 +69,7 @@ const InfoCard = ({ item, days }) => {
   let isWishlisted = checkIfInLocal(id);
   return (
     <div
-      className="flex py-7 px-10 border-b cursor-pointer hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
+      className="flex py-7 px-10 border-b hover:opacity-80 hover:shadow-lg shadow-indigo-500/50  transition duration-200 ease-out first:border-t"
       key={item.id + 11234}
     >
       <div
@@ -85,21 +85,24 @@ const InfoCard = ({ item, days }) => {
         />
       </div>
       <div className="flex flex-col flex-grow pl-5" key={bedrooms}>
-        <div className="flex justify-between">
+        <div className="flex justify-between box-border">
           <p>{title}</p>
           {isWishlisted ? (
             <LikedIcon
               onClick={() => addToLiked(item)}
-              className="h-7 cursor-pointer text-red-500"
+              className="h-7 cursor-pointer text-red-500 hover:scale-150 transition transform duration-200 ease-out"
             />
           ) : (
             <HeartIcon
               onClick={() => addToLiked(item)}
-              className="h-7 cursor-pointer"
+              className="h-7 cursor-pointer hover:scale-125 transition transform duration-200 ease-out"
             />
           )}
         </div>
-        <h4 onClick={() => router.push(`search/${id}`)} className="text-xl">
+        <h4
+          onClick={() => router.push(`search/${id}`)}
+          className="text-xl cursor-pointer"
+        >
           {listingName}
         </h4>
         <div className="border-b w-10 pt-2" />
