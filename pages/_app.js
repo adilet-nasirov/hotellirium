@@ -5,10 +5,10 @@ import { Router } from "next/router";
 import { DataProvider } from '../lib/DataContext';
 
 const progress = new ProgressBar({
-  size: 5,
+  size: 4,
   color: "#FE595E",
   className: "bar-of-progress",
-  delay: 100,
+  delay: 500,
 });
 
 Router.events.on("routeChangeStart", ()=>progress.start());
