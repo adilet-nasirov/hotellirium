@@ -65,8 +65,8 @@ const Header = ({ placeholder }) => {
       });
   };
   return (
-    <div className="box-border z-20">
-      <header className="sticky top-0 z-50  bg-white shadow-md p-3 md:px-10">
+    <div className="sticky top-0 box-border z-20 bg-white border-b shadow-sm">
+      <header className="z-50  bg-white shadow-md p-3 md:px-10">
         <div className="grid grid-cols-3 max-w-7xl mx-auto">
           {/* Left div */}
           <div
