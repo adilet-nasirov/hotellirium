@@ -106,7 +106,7 @@ const InfoCard = ({ item, days }) => {
           {listingName}
         </h4>
         <div className="border-b w-10 pt-2" />
-        <p className="pt-2 text-sm text-gray-500 flex-grow">{`${listingGuestLabel}• ${bedrooms} bedroom • ${listingBedLabel} • ${listingBathroomLabel} • ${listingPreviewAmenityNames.join(
+        <p className="pt-2 text-sm text-gray-500 flex-grow">{`${listingGuestLabel}• ${bedrooms} bedroom • ${listingBedLabel} • ${listingBathroomLabel} • ${listingPreviewAmenityNames?.join(
           "•"
         )} `}</p>
 
