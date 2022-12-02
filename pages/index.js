@@ -86,7 +86,7 @@ export default function Home() {
           <LargeCard
             img={"https://links.papareact.com/4cj"}
             title={"The Greatest Outdoors"}
-            description={"Wishlists curated by Ordo"}
+            description={"Wishlists curated by Hotellirium"}
             buttonText={"Get Inspired"}
           />
         </section>
